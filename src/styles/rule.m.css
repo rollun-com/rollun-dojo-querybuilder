@@ -1,0 +1,22 @@
+.rule {
+    padding: 5px;
+    border: 1px solid darkgrey;
+    display: flex;
+    flex-direction: row;
+}
+
+.fieldSelect {
+
+}
+
+.operatorSelect {
+
+}
+
+.valueInput {
+
+}
+
+.removeButton {
+
+}

@@ -1,0 +1,15 @@
+.groupRule {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid darkgrey;
+}
+
+.groupRuleChildren {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid darkgrey;
+}
+
+.groupRuleControls {
+
+}
