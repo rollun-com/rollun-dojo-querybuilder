@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "dependencies": {
     "@dojo/framework": "^4.0.0",
+    "@dojo/themes": "^4.0.1",
     "@dojo/widgets": "^4.0.1",
+    "rollun-ts-rql": "^0.2.3",
     "tslib": "~1.8.1"
   },
   "devDependencies": {

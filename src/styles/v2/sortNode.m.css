@@ -1,0 +1,13 @@
+.sort {
+    border: 1px solid darkgrey;
+    padding: 10px;
+}
+
+.addNewOptionBtn {
+
+}
+
+.sortRow {
+    display: flex;
+    flex-direction: row;
+}

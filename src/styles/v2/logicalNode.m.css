@@ -1,0 +1,10 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid dodgerblue;
+    padding: 10px;
+}
+.controls {
+    display: flex;
+    flex-direction: row;
+}

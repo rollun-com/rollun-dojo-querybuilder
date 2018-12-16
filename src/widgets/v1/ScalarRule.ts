@@ -1,6 +1,6 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import {v, w} from "@dojo/framework/widget-core/d";
-import * as css from '../styles/rule.m.css';
+import * as css from '../../styles/v1/rule.m.css';
 import Select from "@dojo/widgets/select";
 import TextInput from "@dojo/widgets/text-input";
 import {VNode} from '@dojo/framework/widget-core/interfaces';

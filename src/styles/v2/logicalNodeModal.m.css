@@ -1,0 +1,22 @@
+.root {
+    display: flex;
+    flex-direction: row;
+}
+
+.logicalNodes {
+    padding: 5px;
+    flex-grow: 0.3;
+}
+
+.scalarNodes {
+    padding: 5px;
+    border-left: 1px solid darkgrey;
+    flex-grow: 0.3;
+}
+
+.arrayNodes {
+    padding: 5px;
+    border-left: 1px solid darkgrey;
+    flex-grow: 0.3
+}
+

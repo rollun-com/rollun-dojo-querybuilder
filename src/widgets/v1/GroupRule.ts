@@ -3,7 +3,7 @@ import {v, w} from '@dojo/framework/widget-core/d';
 import {VNode, WNode} from "@dojo/framework/widget-core/interfaces";
 import {Map} from "@dojo/framework/shim/main";
 import ScalarRule, {ScalarRuleState} from './ScalarRule';
-import * as css from '../styles/groupRule.m.css';
+import * as css from '../../styles/v1/groupRule.m.css';
 
 export interface GroupRuleState {
     operatorName: string,
