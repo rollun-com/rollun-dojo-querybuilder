@@ -26,6 +26,35 @@ export interface LogicalNodeProps {
 
 export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
     private openDialog: boolean = false;
+
+    private scalarNodeNames = [
+        'like',
+        'alike',
+        'eq',
+        'ge',
+        'gt',
+        'le',
+        'lt',
+        'ne'
+    ];
+
+    private arrayNodeNames = [
+        'in', 'out'
+    ];
+
+    private dialogState = {
+        scalar: {
+            name: this.scalarNodeNames[0],
+            field: '',
+            value: ''
+        },
+        array: {
+            name: this.arrayNodeNames[0],
+            field: '',
+            value: ''
+        }
+    };
+
     private nodeFactory: RqlNodeFactory;
 
     constructor() {
@@ -97,22 +126,6 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
     }
 
     private getChildNodeCreationMenu(): VNode {
-        const scalarNodeNames = [
-            'like',
-            'alike',
-            'eq',
-            'ge',
-            'gt',
-            'le',
-            'lt',
-            'ne'
-        ];
-        const arrayNodeNames = [
-            'in', 'out'
-        ];
-        let nodeName: string = '';
-        let nodeValue: string = '';
-        let nodeFieldName: string = '';
         return v('div', {classes: modalCss.root}, [
             v('div', {classes: modalCss.logicalNodes}, [
                 'Logical Nodes',
@@ -130,60 +143,73 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
             v('div', {classes: modalCss.scalarNodes}, [
                 'Scalar nodes',
                 w(Select, {
-                    options: scalarNodeNames,
+                    value: this.dialogState.scalar.name,
+                    options: this.scalarNodeNames,
                     onChange: (value: string) => {
-                        nodeName = value;
+                        this.dialogState.scalar.name = value;
+                        this.invalidate();
                     }
                 }),
                 w(TextInput, {
-                    value: nodeFieldName,
+                    value: this.dialogState.scalar.field,
                     placeholder: 'field name',
                     onChange: (value: string) => {
-                        nodeFieldName = value;
+                        this.dialogState.scalar.field = value;
+                        this.invalidate();
                     }
                 }),
                 w(TextInput, {
-                    value: nodeValue,
+                    value: this.dialogState.scalar.value,
                     placeholder: 'value',
                     onChange: (value: string) => {
-                        nodeValue = value;
+                        this.dialogState.scalar.value = value;
+                        this.invalidate();
                     }
                 }),
                 v('button', {
                     onclick: () => {
-                        this.createChildNode(nodeName, {field: nodeFieldName, value: nodeValue})
+                        this.createChildNode(this.dialogState.scalar.name, {
+                            field: this.dialogState.scalar.field,
+                            value: this.dialogState.scalar.value
+                        })
                     }
                 }, ['Create scalar node'])
             ]),
             v('div', {classes: modalCss.arrayNodes}, [
                 'Array nodes',
                 w(Select, {
-                    options: arrayNodeNames,
+                    value: this.dialogState.array.name,
+                    options: this.arrayNodeNames,
                     onChange: (value: string) => {
-                        nodeName = value;
+                        this.dialogState.array.name = value;
+                        this.invalidate();
                     }
                 }),
                 w(TextInput, {
-                    value: nodeFieldName,
+                    value: this.dialogState.array.field,
                     placeholder: 'field name',
                     onChange: (value: string) => {
-                        nodeFieldName = value;
+                        this.dialogState.array.field = value;
+                        this.invalidate();
                     }
                 }),
                 w(TextInput, {
-                    value: nodeValue,
+                    value: this.dialogState.array.value,
                     placeholder: 'values',
                     onChange: (value: string) => {
-                        nodeValue = value;
+                        this.dialogState.array.value = value;
+                        this.invalidate();
                     }
                 }),
                 v('button', {
                     onclick: () => {
-                        this.createChildNode(nodeName, {field: nodeFieldName, values: nodeValue.split(',')})
+                        this.createChildNode(this.dialogState.array.name, {
+                            field: this.dialogState.array.field,
+                            values: this.dialogState.array.value.split(',')
+                        })
                     }
                 }, ['Create scalar node'])
             ])
-
         ])
     }
 
