@@ -4,13 +4,13 @@ import AbstractQueryNode from 'rollun-ts-rql/dist/nodes/AbstractQueryNode';
 import Select from 'rollun-ts-rql/dist/nodes/Select';
 import Sort from 'rollun-ts-rql/dist/nodes/Sort';
 import Limit from 'rollun-ts-rql/dist/nodes/Limit';
-import SelectNodeEditor from './queryNodeEditor/SelectNodeEditor';
+import SelectNodeEditor from './queryNodeEditor/Select/SelectNodeEditor';
 import SortNodeEditor from "./queryNodeEditor/SortNodeEditor";
 import LimitNodeEditor from './queryNodeEditor/LimitNodeEditor';
 import LogicalNodeEditor from './queryNodeEditor/LogicalNodeEditor';
 import And from 'rollun-ts-rql/dist/nodes/logicalNodes/And';
 import Query from 'rollun-ts-rql/dist/Query';
-import * as css from '../../styles/v2/queryEditor.m.css';
+import * as css from '../styles/queryEditor.m.css';
 
 export interface QueryQueryEditorProps {
     query: Query,

@@ -1,7 +1,7 @@
 import WidgetBase from "@dojo/framework/widget-core/WidgetBase";
 import {v, w} from '@dojo/framework/widget-core/d';
 import {VNode} from "@dojo/framework/widget-core/interfaces";
-import * as css from "../../../styles/v2/arrayNode.m.css";
+import * as css from "../../styles/arrayNode.m.css";
 import Select from "@dojo/widgets/select";
 import TextInput from "@dojo/widgets/text-input";
 import AbstractArrayNode from 'rollun-ts-rql/dist/nodes/arrayNodes/AbstractArrayNode';

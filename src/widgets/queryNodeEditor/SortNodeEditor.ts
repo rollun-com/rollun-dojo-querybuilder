@@ -1,6 +1,6 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import Sort from 'rollun-ts-rql/dist/nodes/Sort';
-import * as css from "../../../styles/v2/sortNode.m.css";
+import * as css from "../../styles/sortNode.m.css";
 import {v, w} from '@dojo/framework/widget-core/d';
 import {VNode} from '@dojo/framework/widget-core/interfaces';
 import TextInput from '@dojo/widgets/text-input';

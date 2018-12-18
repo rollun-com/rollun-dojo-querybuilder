@@ -9,7 +9,7 @@ import Or from 'rollun-ts-rql/dist/nodes/logicalNodes/Or';
 import Eq from 'rollun-ts-rql/dist/nodes/scalarNodes/Eq';
 import Le from 'rollun-ts-rql/dist/nodes/scalarNodes/Le';
 import Ge from 'rollun-ts-rql/dist/nodes/scalarNodes/Ge';
-import QueryEditor from './widgets/v2/QueryEditor';
+import QueryEditor from './widgets/QueryEditor';
 
 const query = new Query(
     {
