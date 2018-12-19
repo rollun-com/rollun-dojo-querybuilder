@@ -29,8 +29,16 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 
     private renderSelectNode(node: (Select | undefined)) {
         if (node) {
-            const onRemove = () => {this.removeNode('select')};
-            return w(SelectNodeEditor, {node, onRemove});
+            const onRemove = () => {
+                this.removeNode('select')
+            };
+            const onSelectNodeChange = (fields: string[]) => {
+                this.properties.query.selectNode = new Select(fields);
+                this.invalidate();
+            };
+            return w(SelectNodeEditor, {
+                node, onRemove, fieldNames: this.properties.fieldNames, onSelectNodeChange
+            });
         }
         else return v('button', {onclick: () => this.addSelectNode()}, ['Add select node'])
     }
@@ -42,7 +50,9 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 
     private renderSortNode(node: Sort) {
         if (node) {
-            const onRemove = () => {this.removeNode('sort')};
+            const onRemove = () => {
+                this.removeNode('sort')
+            };
             return w(SortNodeEditor, {node, onRemove})
         }
         else return v('button', {onclick: () => this.addSortNode()}, ['Add sort node'])
@@ -55,14 +65,16 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 
     private renderLimitNode(node: Limit) {
         if (node) {
-            const onRemove = () => {this.removeNode('limit')};
+            const onRemove = () => {
+                this.removeNode('limit')
+            };
             return w(LimitNodeEditor, {node, onRemove})
         }
         else return v('button', {onclick: () => this.addLimitNode()}, ['Add limit node'])
     }
 
     private addLimitNode() {
-        this.properties.query.limitNode = new Limit(20,0);
+        this.properties.query.limitNode = new Limit(20, 0);
         this.invalidate()
     }
 

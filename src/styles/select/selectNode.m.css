@@ -1,4 +1,22 @@
 .root {
     border: 1px solid darkgrey;
     padding: 10px;
+    display: flex;
+    flex-direction: row;
 }
+
+.activeNodesContainer {
+    display: flex;
+    flex: 0.4;
+}
+
+.possibleNodesContainer {
+    display: flex;
+    flex: 0.4;
+}
+
+.removeAreaContainer {
+    display: flex;
+    flex: 0.2;
+}
+

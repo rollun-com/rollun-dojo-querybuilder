@@ -4,3 +4,17 @@
     border: 1px solid darkgrey;
     padding: 10px;
 }
+
+.limitEditorRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.editorsContainer {
+    display: flex;
+    margin-right: 10px;
+}
+
+.editorItem {
+    margin-right: 10px;
+}

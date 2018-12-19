@@ -1,9 +1,8 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import Sort from 'rollun-ts-rql/dist/nodes/Sort';
 import * as css from "../../styles/sortNode.m.css";
-import {v, w} from '@dojo/framework/widget-core/d';
+import {v} from '@dojo/framework/widget-core/d';
 import {VNode} from '@dojo/framework/widget-core/interfaces';
-import TextInput from '@dojo/widgets/text-input';
 
 export interface SortNodeEditorProps {
     node: Sort,
@@ -15,7 +14,7 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
     protected render() {
         return v('div', {classes: css.sort}, [
             v('div', {}, ['Sort fields']),
-            v('ul', {},
+            v('div', {},
                 this.renderSortEditors()
             ),
             v('button', {
@@ -36,32 +35,35 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
         const result: VNode[] = [];
         Object.entries(this.properties.node.sortOptions).forEach((entry) => {
             const [field, sortDirection] = entry;
-            const sortNode = v('div', {classes: css.sortRow}, [
-                w(TextInput, {
-                    value: field,
-                    onChange: (value: string) => {
-                        const sortDirection = this.properties.node.sortOptions[field];
-                        delete this.properties.node.sortOptions[field];
-                        this.properties.node.sortOptions[value] = sortDirection;
-                        this.invalidate();
+            const sortNode = v('div',
+                {classes: css.sortRow},
+                [
+                    v('input', {
+                        type: 'text',
+                        value: field,
+                        onChange: (value: string) => {
+                            const sortDirection = this.properties.node.sortOptions[field];
+                            delete this.properties.node.sortOptions[field];
+                            this.properties.node.sortOptions[value] = sortDirection;
+                            this.invalidate();
 
-                    }
-                }),
-                v('button', {
+                        }
+                    }),
+                    v('button', {
+                            onclick: () => {
+                                this.properties.node.sortOptions[field] = this.properties.node.sortOptions[field] * -1;
+                                this.invalidate();
+                            }
+                        },
+                        [sortDirection === -1 ? 'asc' : 'desc']
+                    ),
+                    v('button', {
                         onclick: () => {
-                            this.properties.node.sortOptions[field] = this.properties.node.sortOptions[field] * -1;
+                            delete this.properties.node.sortOptions[field];
                             this.invalidate();
                         }
-                    },
-                    [sortDirection === -1 ? 'asc' : 'desc']
-                ),
-                v('button', {
-                    onclick: () => {
-                        delete this.properties.node.sortOptions[field];
-                        this.invalidate();
-                    }
-                }, ['X'])
-            ]);
+                    }, ['X'])
+                ]);
             result.push(sortNode);
         });
         return result;

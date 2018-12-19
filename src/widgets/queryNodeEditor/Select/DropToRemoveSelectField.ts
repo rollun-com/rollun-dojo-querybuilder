@@ -1,10 +1,13 @@
 import WidgetBase from "@dojo/framework/widget-core/WidgetBase";
 import {v} from '@dojo/framework/widget-core/d';
 import * as css from "../../../styles/select/dropToRemoveSelectField.m.css";
+import {SelectNodeDragData} from "./SelectNodeEditor";
 
 
 export interface DropToRemoveSelectFieldProps {
-    onRemoveField(fieldNamme: string): void
+    onRemoveField(fieldName: string): void,
+
+    dragData: SelectNodeDragData,
 }
 
 export default class DropToRemoveSelectField extends WidgetBase<DropToRemoveSelectFieldProps> {
@@ -22,8 +25,8 @@ export default class DropToRemoveSelectField extends WidgetBase<DropToRemoveSele
                 ondragover: (event: DragEvent) => {
                     this.checkDropPossibility(event)
                 },
-                ondragleave: () => {
-                    this.disableDropTarget()
+                ondragleave: (event: DragEvent) => {
+                    this.disableDropTarget(event)
                 },
                 ondrop: (event: DragEvent) => {
                     this.removeDroppedNodeFromSelectedNodes(event)
@@ -33,24 +36,23 @@ export default class DropToRemoveSelectField extends WidgetBase<DropToRemoveSele
     }
 
     private checkDropPossibility(event: DragEvent) {
-        const dragDataString = event.dataTransfer.getData('application/json');
-        if (dragDataString && (JSON.parse(dragDataString).type === 'selectNode')) {
-            event.preventDefault();
+        event.preventDefault();
+        if (event.dataTransfer.types.indexOf('nodeFieldName') !== -1) {
             this.awaitingDrop = true;
             this.validDropTarget = true;
             this.invalidate();
+            return false;
         }
+        return true;
     }
 
-    private disableDropTarget() {
+    private disableDropTarget(event: DragEvent) {
         this.awaitingDrop = false;
         this.invalidate();
     }
 
     private removeDroppedNodeFromSelectedNodes(event: DragEvent) {
-        const dragDataString = event.dataTransfer.getData('application/json');
-        const dragData = JSON.parse(dragDataString);
-        this.properties.onRemoveField(dragData.fieldName)
+        this.properties.onRemoveField(event.dataTransfer.getData('nodeFieldName'))
     }
 
 
