@@ -2,15 +2,17 @@ import WidgetBase from "@dojo/framework/widget-core/WidgetBase";
 import {v, w} from "@dojo/framework/widget-core/d";
 import AbstractQueryNode from 'rollun-ts-rql/dist/nodes/AbstractQueryNode';
 import Select from 'rollun-ts-rql/dist/nodes/Select';
-import Sort from 'rollun-ts-rql/dist/nodes/Sort';
+import Sort, {SortOptions} from 'rollun-ts-rql/dist/nodes/Sort';
 import Limit from 'rollun-ts-rql/dist/nodes/Limit';
 import SelectNodeEditor from './queryNodeEditor/Select/SelectNodeEditor';
-import SortNodeEditor from "./queryNodeEditor/SortNodeEditor";
+import SortNodeEditor from "./queryNodeEditor/Sort/SortNodeEditor";
 import LimitNodeEditor from './queryNodeEditor/LimitNodeEditor';
 import LogicalNodeEditor from './queryNodeEditor/LogicalNodeEditor';
 import And from 'rollun-ts-rql/dist/nodes/logicalNodes/And';
 import Query from 'rollun-ts-rql/dist/Query';
 import * as css from '../styles/queryEditor.m.css';
+import DropToRemoveNodeField from './queryNodeEditor/DropToRemoveNodeField';
+import PossibleNodeFields from './queryNodeEditor/PossibleNodeFields';
 
 export interface QueryQueryEditorProps {
     query: Query,
@@ -19,11 +21,27 @@ export interface QueryQueryEditorProps {
 
 export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
     protected render() {
+        console.log(this.properties.query);
         return v('div', {classes: css.root}, [
-            this.renderSelectNode(this.properties.query.selectNode),
-            this.renderSortNode(this.properties.query.sortNode),
-            this.renderLimitNode(this.properties.query.limitNode),
-            this.renderQueryNode(this.properties.query.queryNode),
+            v('div', {
+                    classes: css.nonQueryEditorsContainer
+                }, [
+                    this.renderSelectNode(this.properties.query.selectNode),
+                    w(DropToRemoveNodeField, {
+                        onNodeFieldRemove: (fieldName: string, nodeType: string) => {
+                            this.removeFieldFromNode(fieldName, nodeType)
+                        }
+                    }),
+                    this.renderSortNode(this.properties.query.sortNode),
+                    w(PossibleNodeFields, {fieldNames: this.properties.fieldNames}),
+                    this.renderLimitNode(this.properties.query.limitNode),
+                ]
+            ),
+            v('div', {
+                classes: css.queryEditorContainer
+            }, [
+                this.renderQueryNode(this.properties.query.queryNode),
+            ])
         ])
     }
 
@@ -40,27 +58,31 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
                 node, onRemove, fieldNames: this.properties.fieldNames, onSelectNodeChange
             });
         }
-        else return v('button', {onclick: () => this.addSelectNode()}, ['Add select node'])
-    }
-
-    private addSelectNode() {
-        this.properties.query.selectNode = new Select(['id']);
-        this.invalidate()
+        else return v('button', {
+            onclick: () => {
+                this.properties.query.selectNode = new Select(['id']);
+                this.invalidate()
+            }
+        }, ['Add select node'])
     }
 
     private renderSortNode(node: Sort) {
         if (node) {
+            const onSortNodeChange = (sortOptions: SortOptions) => {
+                this.properties.query.sortNode = new Sort(sortOptions);
+                this.invalidate();
+            };
             const onRemove = () => {
                 this.removeNode('sort')
             };
-            return w(SortNodeEditor, {node, onRemove})
+            return w(SortNodeEditor, {node, onRemove, onSortNodeChange})
         }
-        else return v('button', {onclick: () => this.addSortNode()}, ['Add sort node'])
-    }
-
-    private addSortNode() {
-        this.properties.query.sortNode = new Sort({id: 1});
-        this.invalidate()
+        else return v('button', {
+            onclick: () => {
+                this.properties.query.sortNode = new Sort({id: 1});
+                this.invalidate()
+            }
+        }, ['Add sort node'])
     }
 
     private renderLimitNode(node: Limit) {
@@ -70,12 +92,12 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
             };
             return w(LimitNodeEditor, {node, onRemove})
         }
-        else return v('button', {onclick: () => this.addLimitNode()}, ['Add limit node'])
-    }
-
-    private addLimitNode() {
-        this.properties.query.limitNode = new Limit(20, 0);
-        this.invalidate()
+        else return v('button', {
+            onclick: () => {
+                this.properties.query.limitNode = new Limit(20, 0);
+                this.invalidate()
+            }
+        }, ['Add limit node'])
     }
 
     private renderQueryNode(node: AbstractQueryNode) {
@@ -86,12 +108,12 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
                 }, fieldNames: this.properties.fieldNames, node: new And([node])
             })
         }
-        else return v('button', {onclick: () => this.addQueryNode()}, ['Add query node'])
-    }
-
-    private addQueryNode() {
-        this.properties.query.queryNode = new And([]);
-        this.invalidate()
+        else return v('button', {
+            onclick: () => {
+                this.properties.query.queryNode = new And([]);
+                this.invalidate()
+            }
+        }, ['Add query node'])
     }
 
     private removeNode(queryNodeName: ('select' | 'sort' | 'limit' | 'query')) {
@@ -114,5 +136,26 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
             }
         }
         this.invalidate();
+    }
+
+    private removeFieldFromNode(fieldName: string, nodeType: string) {
+        switch (nodeType) {
+            case 'selectnode':
+                const fieldNameIndex = this.properties.query.selectNode.fields.indexOf(fieldName);
+                if (fieldNameIndex !== -1) {
+                    this.properties.query.selectNode.fields.splice(fieldNameIndex, 1);
+                    const newFields = [...this.properties.query.selectNode.fields];
+                    this.properties.query.selectNode = new Select(newFields);
+                }
+                break;
+            case 'sortnode':
+                if (this.properties.query.sortNode.sortOptions.hasOwnProperty(fieldName)) {
+                    delete this.properties.query.sortNode.sortOptions[fieldName];
+                    const newSortOptions = Object.assign({}, this.properties.query.sortNode.sortOptions);
+                    this.properties.query.sortNode = new Sort(newSortOptions);
+                }
+                break;
+        }
+        this.invalidate()
     }
 }

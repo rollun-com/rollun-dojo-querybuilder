@@ -1,6 +1,8 @@
 .root {
     border: 1px solid darkgrey;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .queryEditorContainer {
@@ -8,5 +10,6 @@
 }
 
 .nonQueryEditorsContainer {
-
+    display: flex;
+    flex-direction: row;
 }

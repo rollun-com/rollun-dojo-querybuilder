@@ -28,7 +28,17 @@ const query = new Query(
             new Ge('age', 18)
         ]),
     });
-const fieldNames = ['id', 'name', 'age', 'city'];
+const fieldNames = [
+    'id',
+    'name',
+    'age',
+    'city',
+    'position',
+    'uuid',
+    'favourite_food',
+    'pet',
+    'isActive'
+];
 
 const r = renderer(() => v('div', {}, [
     w(QueryEditor, {query, fieldNames}),

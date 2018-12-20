@@ -1,6 +1,6 @@
 .root {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     border: 1px solid darkgrey;
     padding: 10px;
 }
@@ -12,9 +12,14 @@
 
 .editorsContainer {
     display: flex;
-    margin-right: 10px;
+    flex-direction: column;
 }
 
 .editorItem {
     margin-right: 10px;
+}
+
+.titleRow {
+    display: flex;
+    flex-direction: row;
 }

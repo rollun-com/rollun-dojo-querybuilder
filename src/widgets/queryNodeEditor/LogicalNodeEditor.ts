@@ -63,6 +63,7 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
     }
 
     protected render() {
+        console.log(this.properties.node);
         const onRemove = (id: number) => this.removeChildNode(id);
         const fieldNames = this.properties.fieldNames;
         return v('div', {classes: css.root}, [
@@ -83,7 +84,7 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
                         },
                         ['X']),
                 ]),
-                v('div', {}, this.properties.node.subNodes.map(
+                v('div', {classes: css.childNodesContainer}, this.properties.node.subNodes.map(
                     (node: AbstractQueryNode, id: number) => {
                         let castedNode;
                         switch (true) {

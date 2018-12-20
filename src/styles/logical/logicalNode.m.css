@@ -1,10 +1,20 @@
 .root {
     display: flex;
     flex-direction: column;
-    border: 2px solid dodgerblue;
-    padding: 10px;
 }
 .controls {
+    background-color: #3075aa;
+    color: #fff;
     display: flex;
     flex-direction: row;
+    border: 1px solid darkgrey;
+    border-bottom: 0;
+    padding: 4px 12px;
+}
+
+.childNodesContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    border: 1px solid darkgrey;
 }

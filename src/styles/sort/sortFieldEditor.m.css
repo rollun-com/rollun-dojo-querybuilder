@@ -1,0 +1,18 @@
+.root {
+
+}
+
+.sortFieldName {
+    padding: 4px 12px;
+    background-color: #676aff
+}
+
+.changeSortDirectionButton {
+
+}
+
+.sortRow {
+    padding: 2px;
+    display: flex;
+    flex-direction: row;
+}

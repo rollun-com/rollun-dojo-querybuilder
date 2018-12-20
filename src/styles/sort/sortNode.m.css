@@ -3,12 +3,11 @@
     padding: 10px;
 }
 
-.addNewOptionBtn {
-
-}
-
-.sortRow {
-    padding: 5px;
+.titleRow {
     display: flex;
     flex-direction: row;
+}
+
+.sortNodeEditor {
+
 }

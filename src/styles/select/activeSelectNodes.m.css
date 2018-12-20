@@ -18,3 +18,11 @@
     border: 3px solid red;
 
 }
+
+.activeSelectNodes {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 200px;
+    height: fit-content;
+    min-width: fit-content;
+}

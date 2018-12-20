@@ -13,6 +13,14 @@ export interface LimitNodeEditorProps {
 export default class LimitNodeEditor extends WidgetBase<LimitNodeEditorProps> {
     render() {
         return v('div', {classes: css.root}, [
+            v('div', {classes: css.titleRow}, [
+                v('span', {}, ['Limit node']),
+                v('button', {
+                    onclick: () => {
+                        this.properties.onRemove()
+                    }
+                }, ['X'])
+            ]),
             v('div', {classes: css.editorsContainer}, [
                 v('div', {classes: css.limitEditorRow}, [
                     v('div', {classes: css.editorItem}, ['Limit']),
@@ -38,12 +46,7 @@ export default class LimitNodeEditor extends WidgetBase<LimitNodeEditorProps> {
                         }
                     }),
                 ]),
-            ]),
-            v('button', {
-                onclick: () => {
-                    this.properties.onRemove()
-                }
-            }, ['X'])
+            ])
         ])
     }
 }

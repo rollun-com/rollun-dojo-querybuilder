@@ -1,23 +1,20 @@
 import WidgetBase from "@dojo/framework/widget-core/WidgetBase";
 import {v} from '@dojo/framework/widget-core/d';
-import * as css from "../../../styles/select/dropToRemoveSelectField.m.css";
-import {SelectNodeDragData} from "./SelectNodeEditor";
+import * as css from "../../styles/dropToRemoveField.m.css";
 
 
-export interface DropToRemoveSelectFieldProps {
-    onRemoveField(fieldName: string): void,
-
-    dragData: SelectNodeDragData,
+export interface DropToRemoveFieldProps {
+    onNodeFieldRemove(fieldName: string, nodeName: string): void
 }
 
-export default class DropToRemoveSelectField extends WidgetBase<DropToRemoveSelectFieldProps> {
+export default class DropToRemoveField extends WidgetBase<DropToRemoveFieldProps> {
     private awaitingDrop = false;
     private validDropTarget = false;
 
     protected render() {
         let classes = css.root;
         if (this.awaitingDrop === true) {
-            classes += this.validDropTarget ? css.validDropTarget : css.invalidDropTarget;
+            classes += this.validDropTarget ? ' ' + css.validDropTarget : ' ' + css.invalidDropTarget;
         }
         return v('div',
             {
@@ -37,7 +34,7 @@ export default class DropToRemoveSelectField extends WidgetBase<DropToRemoveSele
 
     private checkDropPossibility(event: DragEvent) {
         event.preventDefault();
-        if (event.dataTransfer.types.indexOf('nodeFieldName') !== -1) {
+        if (event.dataTransfer.types.indexOf('nodefieldname') !== -1) {
             this.awaitingDrop = true;
             this.validDropTarget = true;
             this.invalidate();
@@ -48,12 +45,18 @@ export default class DropToRemoveSelectField extends WidgetBase<DropToRemoveSele
 
     private disableDropTarget(event: DragEvent) {
         this.awaitingDrop = false;
+        this.validDropTarget = false;
         this.invalidate();
     }
 
     private removeDroppedNodeFromSelectedNodes(event: DragEvent) {
-        this.properties.onRemoveField(event.dataTransfer.getData('nodeFieldName'))
+        const nodeFieldName = event.dataTransfer.getData('nodefieldname');
+        if (event.dataTransfer.types.indexOf('selectnode') !== -1) {
+            const nodeType = 'selectnode';
+            this.properties.onNodeFieldRemove(nodeFieldName, nodeType);
+        } else {
+            const nodeType = 'sortnode';
+            this.properties.onNodeFieldRemove(nodeFieldName, nodeType);
+        }
     }
-
-
 }

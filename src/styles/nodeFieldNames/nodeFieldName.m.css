@@ -1,0 +1,17 @@
+.root {
+    padding: 4px 8px;
+    border: 1px solid darkgrey;
+    border-radius: 3px;
+    margin: 2px;
+    background-color: #94c193
+}
+
+.active {
+
+}
+
+.root.active {
+    background-color: #4fbf54
+
+}
+

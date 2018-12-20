@@ -1,14 +1,13 @@
 .root {
     border: 1px solid darkgrey;
-    background-color: #eea755;
     padding: 5px;
 }
 
 .invalidDropTarget {
-    border: 1px solid red;
+    border: 3px solid red;
 }
 
 .validDropTarget {
-    border: 1px solid green;
+    border: 3px solid #00ef00;
 
 }

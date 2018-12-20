@@ -1,6 +1,6 @@
 import {v, w} from "@dojo/framework/widget-core/d";
 import * as css from "../../../styles/select/activeSelectNodes.m.css";
-import SelectNodeField from "./SelectNodeField";
+import NodeFieldName from "../NodeFieldName";
 import WidgetBase from "@dojo/framework/widget-core/WidgetBase";
 import Select from 'rollun-ts-rql/dist/nodes/Select';
 import {SelectNodeDragData} from "./SelectNodeEditor";
@@ -8,6 +8,7 @@ import {SelectNodeDragData} from "./SelectNodeEditor";
 export interface ActiveSelectNodesContainerProps {
     node: Select,
     dragData: SelectNodeDragData,
+
     onAddField(fieldName: string): void
 }
 
@@ -30,16 +31,18 @@ export default class ActiveSelectNodes extends WidgetBase<ActiveSelectNodesConta
                     this.disableDropTarget()
                 },
                 ondrop: (event: DragEvent) => {
-                    this.addDroppedNodeToSelectedNodes()
+                    this.addDroppedNodeToSelectedNodes(event)
                 }
             },
             [
-                v('div', {classes: css.title}, ['Active select nodes']),
+                v('div', {
+                    classes: css.title
+                }, ['Active select nodes']),
                 v('div',
-                    {},
+                    {classes: css.activeSelectNodes},
                     this.properties.node.fields.map(
                         (fieldName) => {
-                            return w(SelectNodeField, {fieldName, dragData: this.properties.dragData})
+                            return w(NodeFieldName, {fieldName, isActive: true, nodeType: 'selectnode'})
                         }
                     )
                 )
@@ -49,13 +52,12 @@ export default class ActiveSelectNodes extends WidgetBase<ActiveSelectNodesConta
 
     private checkDropPossibility(event: DragEvent) {
         event.preventDefault();
-        const dragData = this.properties.dragData.fieldName;
-        this.awaitingDrop = true;
-        if (dragData && dragData.length > 0) {
+        if (event.dataTransfer.types.indexOf('nodefieldname') !== -1) {
+            this.awaitingDrop = true;
             this.validDropTarget = true;
+            this.invalidate();
             return false;
         }
-        this.invalidate();
         return true;
     }
 
@@ -65,8 +67,8 @@ export default class ActiveSelectNodes extends WidgetBase<ActiveSelectNodesConta
         this.invalidate();
     }
 
-    private addDroppedNodeToSelectedNodes() {
-        this.properties.onAddField(this.properties.dragData.fieldName);
+    private addDroppedNodeToSelectedNodes(event: DragEvent) {
+        this.properties.onAddField(event.dataTransfer.getData('nodefieldname'));
         this.disableDropTarget();
     }
 
