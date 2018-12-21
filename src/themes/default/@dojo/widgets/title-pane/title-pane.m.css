@@ -1,0 +1,33 @@
+@import '../../../../../../node_modules/@dojo/themes/dojo/variables.css';
+
+.title {
+}
+
+.closeable {
+
+}
+
+.arrow {
+    composes: arrow from '../../../../../../node_modules/@dojo/themes/dojo/title-pane.m.css';
+
+}
+
+.root {
+    composes: root from '../../../../../../node_modules/@dojo/themes/dojo/title-pane.m.css';
+}
+
+.open {
+    composes: open from '../../../../../../node_modules/@dojo/themes/dojo/title-pane.m.css';
+}
+
+.content {
+    composes: content from '../../../../../../node_modules/@dojo/themes/dojo/title-pane.m.css';
+}
+
+.titleButton {
+    composes: titleButton from '../../../../../../node_modules/@dojo/themes/dojo/title-pane.m.css';
+}
+
+.contentTransition {
+    composes: contentTransition from '../../../../../../node_modules/@dojo/themes/dojo/title-pane.m.css';
+}

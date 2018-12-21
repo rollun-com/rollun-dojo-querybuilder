@@ -5,18 +5,15 @@
 
 .logicalNodes {
     padding: 5px;
-    flex-grow: 0.3;
 }
 
 .scalarNodes {
     padding: 5px;
-    border-left: 1px solid darkgrey;
-    flex-grow: 0.3;
+    min-height: 380px;
 }
 
 .arrayNodes {
     padding: 5px;
-    border-left: 1px solid darkgrey;
-    flex-grow: 0.3
+    min-height: 150px;
 }
 

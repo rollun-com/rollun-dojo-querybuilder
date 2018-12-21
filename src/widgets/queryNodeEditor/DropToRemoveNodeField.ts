@@ -29,7 +29,10 @@ export default class DropToRemoveField extends WidgetBase<DropToRemoveFieldProps
                     this.removeDroppedNodeFromSelectedNodes(event)
                 }
             },
-            ['Drop node here to remove it'])
+            [
+                v('i', {classes: "fas fa-trash-alt"}),
+                v('span', {classes: css.title}, ['Drop node here to remove it']),
+            ])
     }
 
     private checkDropPossibility(event: DragEvent) {

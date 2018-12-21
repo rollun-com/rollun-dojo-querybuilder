@@ -2,21 +2,19 @@
     border: 1px solid darkgrey;
     padding: 10px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .activeNodesContainer {
     display: flex;
-    flex: 0.4;
 }
 
-.possibleNodesContainer {
+.controls {
     display: flex;
-    flex: 0.4;
+    justify-content: flex-end;
 }
 
-.removeAreaContainer {
-    display: flex;
-    flex: 0.2;
+.title {
+    margin-right: 70px;
 }
 

@@ -7,7 +7,7 @@ import Limit from 'rollun-ts-rql/dist/nodes/Limit';
 import SelectNodeEditor from './queryNodeEditor/Select/SelectNodeEditor';
 import SortNodeEditor from "./queryNodeEditor/Sort/SortNodeEditor";
 import LimitNodeEditor from './queryNodeEditor/LimitNodeEditor';
-import LogicalNodeEditor from './queryNodeEditor/LogicalNodeEditor';
+import LogicalNodeEditor from './queryNodeEditor/Logical/LogicalNodeEditor';
 import And from 'rollun-ts-rql/dist/nodes/logicalNodes/And';
 import Query from 'rollun-ts-rql/dist/Query';
 import * as css from '../styles/queryEditor.m.css';
@@ -21,20 +21,19 @@ export interface QueryQueryEditorProps {
 
 export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
     protected render() {
-        console.log(this.properties.query);
         return v('div', {classes: css.root}, [
             v('div', {
                     classes: css.nonQueryEditorsContainer
                 }, [
-                    this.renderSelectNode(this.properties.query.selectNode),
-                    w(DropToRemoveNodeField, {
-                        onNodeFieldRemove: (fieldName: string, nodeType: string) => {
-                            this.removeFieldFromNode(fieldName, nodeType)
-                        }
-                    }),
-                    this.renderSortNode(this.properties.query.sortNode),
-                    w(PossibleNodeFields, {fieldNames: this.properties.fieldNames}),
-                    this.renderLimitNode(this.properties.query.limitNode),
+                        w(PossibleNodeFields, {fieldNames: this.properties.fieldNames}),
+                        this.renderSelectNode(this.properties.query.selectNode),
+                        this.renderSortNode(this.properties.query.sortNode),
+                        w(DropToRemoveNodeField, {
+                            onNodeFieldRemove: (fieldName: string, nodeType: string) => {
+                                this.removeFieldFromNode(fieldName, nodeType)
+                            }
+                        }),
+                        this.renderLimitNode(this.properties.query.limitNode),
                 ]
             ),
             v('div', {
@@ -59,6 +58,7 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
             });
         }
         else return v('button', {
+            classes: 'btn btn-lg btn-light',
             onclick: () => {
                 this.properties.query.selectNode = new Select(['id']);
                 this.invalidate()
@@ -78,6 +78,7 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
             return w(SortNodeEditor, {node, onRemove, onSortNodeChange})
         }
         else return v('button', {
+            classes: 'btn btn-lg btn-light',
             onclick: () => {
                 this.properties.query.sortNode = new Sort({id: 1});
                 this.invalidate()
@@ -93,6 +94,7 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
             return w(LimitNodeEditor, {node, onRemove})
         }
         else return v('button', {
+            classes: 'btn btn-lg btn-light',
             onclick: () => {
                 this.properties.query.limitNode = new Limit(20, 0);
                 this.invalidate()
@@ -109,6 +111,7 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
             })
         }
         else return v('button', {
+            classes: 'btn btn-lg btn-light',
             onclick: () => {
                 this.properties.query.queryNode = new And([]);
                 this.invalidate()

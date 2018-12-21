@@ -18,3 +18,11 @@
     padding: 12px;
     border: 1px solid darkgrey;
 }
+
+.title {
+    margin: 2px 8px;
+}
+
+.controlsButtons {
+    float: right;
+}

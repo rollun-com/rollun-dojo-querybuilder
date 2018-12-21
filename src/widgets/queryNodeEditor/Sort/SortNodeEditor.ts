@@ -29,6 +29,7 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
                     v('div', {classes: css.titleRow}, [
                         v('span', {}, ['Sort fields']),
                         v('button', {
+                            classes: 'btn btn-sm btn-danger',
                             onclick: () => {
                                 this.properties.onRemove()
                             }

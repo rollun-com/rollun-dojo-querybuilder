@@ -1,0 +1,27 @@
+@import '../../../../../../node_modules/@dojo/themes/dojo/variables.css';
+
+
+.root {
+	composes: root from '../../../../../../node_modules/@dojo/themes/dojo/text-input.m.css';
+
+}
+
+.input {
+	composes: input from '../../../../../../node_modules/@dojo/themes/dojo/text-input.m.css';
+
+}
+
+.inputWrapper {
+	composes: inputWrapper from '../../../../../../node_modules/@dojo/themes/dojo/text-input.m.css';
+}
+
+.invalid {
+	composes: invalid from '../../../../../../node_modules/@dojo/themes/dojo/text-input.m.css';
+
+}
+
+.valid {
+	composes: valid from '../../../../../../node_modules/@dojo/themes/dojo/text-input.m.css';
+
+}
+

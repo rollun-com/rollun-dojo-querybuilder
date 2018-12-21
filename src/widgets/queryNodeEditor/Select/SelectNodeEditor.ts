@@ -26,6 +26,13 @@ export default class SelectNodeEditor extends WidgetBase<SelectNodeProps> {
         return v('div',
             {classes: css.root},
             [
+                v('div', {classes: css.controls}, [
+                    v('span', {classes: css.title}, ['Select node']),
+                    v('button', {
+                        classes: 'btn btn-sm btn-danger',
+                        onclick: () => this.properties.onRemove()
+                    }, ['X'])
+                ]),
                 v('div',
                     {classes: css.activeNodesContainer}, [
                         w(ActiveSelectNodesContainer, {
@@ -40,14 +47,6 @@ export default class SelectNodeEditor extends WidgetBase<SelectNodeProps> {
             ]
         )
 
-    }
-
-    removeFieldFromNode(fieldName: string) {
-        const fieldNameIndex = this.properties.node.fields.indexOf(fieldName);
-        if (fieldNameIndex !== -1) {
-            this.properties.node.fields.splice(fieldNameIndex, 1);
-            this.properties.onSelectNodeChange([...this.properties.node.fields]);
-        }
     }
 
     addFieldToNode(fieldName: string) {

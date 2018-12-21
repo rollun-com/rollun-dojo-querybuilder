@@ -9,9 +9,10 @@ import Or from 'rollun-ts-rql/dist/nodes/logicalNodes/Or';
 import Eq from 'rollun-ts-rql/dist/nodes/scalarNodes/Eq';
 import Le from 'rollun-ts-rql/dist/nodes/scalarNodes/Le';
 import Ge from 'rollun-ts-rql/dist/nodes/scalarNodes/Ge';
-import QueryEditor from './widgets/QueryEditor';
+//import QueryEditor from './widgets/QueryEditor';
+import QueryEditorInTitlePane from "./QueryEditorInTitlePane";
 
-const query = new Query(
+const query: Query = new Query(
     {
         select: new Select(['id', 'name', 'age']),
         sort: new Sort({
@@ -28,7 +29,7 @@ const query = new Query(
             new Ge('age', 18)
         ]),
     });
-const fieldNames = [
+const fieldNames: string[] = [
     'id',
     'name',
     'age',
@@ -41,6 +42,6 @@ const fieldNames = [
 ];
 
 const r = renderer(() => v('div', {}, [
-    w(QueryEditor, {query, fieldNames}),
+    w(QueryEditorInTitlePane, {query: query, fieldNames: fieldNames}),
 ]));
 r.mount();
