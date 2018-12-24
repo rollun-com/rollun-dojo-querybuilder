@@ -1,6 +1,6 @@
 {
   "name": "rollun-rql-query-builder",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
     "@dojo/framework": "^4.0.0",
     "@dojo/themes": "^4.0.1",
@@ -15,7 +15,7 @@
     "@types/node": "~9.6.5",
     "typescript": "~2.6.1"
   },
-  "files" : [
+  "files": [
     "_build/*",
     "styles/*",
     "themes/*"
