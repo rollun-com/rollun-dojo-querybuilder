@@ -1,6 +1,7 @@
 import WidgetBase from "@dojo/framework/widget-core/WidgetBase";
 import {v} from '@dojo/framework/widget-core/d';
 import * as css from "../../styles/dropToRemoveField.m.css";
+import {VNode} from "@dojo/framework/widget-core/interfaces";
 
 
 export interface DropToRemoveFieldProps {
@@ -11,7 +12,7 @@ export default class DropToRemoveField extends WidgetBase<DropToRemoveFieldProps
     private awaitingDrop = false;
     private validDropTarget = false;
 
-    protected render() {
+    protected render():VNode {
         let classes = css.root;
         if (this.awaitingDrop === true) {
             classes += this.validDropTarget ? ' ' + css.validDropTarget : ' ' + css.invalidDropTarget;

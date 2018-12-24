@@ -9,7 +9,7 @@ import AbstractArrayNode from 'rollun-ts-rql/dist/nodes/arrayNodes/AbstractArray
 import * as css from "../../../styles/logical/logicalNode.m.css";
 import Dialog from "@dojo/widgets/dialog";
 import theme from '@dojo/themes/dojo';
-import {WNode} from '@dojo/framework/widget-core/interfaces';
+import {WNode, VNode} from '@dojo/framework/widget-core/interfaces';
 import RqlNodeFactory, {RqlNodeFactoryParams} from "../../RqlNodeFactory";
 import ChildNodeCreationForm from './ChildNodeCreationForm';
 
@@ -32,7 +32,7 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
         this.nodeFactory = new RqlNodeFactory();
     }
 
-    protected render() {
+    protected render(): VNode {
         const onRemove = (id: number) => this.removeChildNode(id);
         const fieldNames = this.properties.fieldNames;
         return v('div', {classes: css.root}, [

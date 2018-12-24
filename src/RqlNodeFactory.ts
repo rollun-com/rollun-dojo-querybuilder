@@ -21,7 +21,7 @@ export interface RqlNodeFactoryParams {
 }
 
 export default class RqlNodeFactory {
-    createNode(name: string, params: RqlNodeFactoryParams) {
+    createNode(name: string, params: RqlNodeFactoryParams): AbstractQueryNode {
         const parsedParams = Object.assign({
             field: '',
             value: '',

@@ -13,6 +13,7 @@ import Query from 'rollun-ts-rql/dist/Query';
 import * as css from '../styles/queryEditor.m.css';
 import DropToRemoveNodeField from './queryNodeEditor/DropToRemoveNodeField';
 import PossibleNodeFields from './queryNodeEditor/PossibleNodeFields';
+import {VNode} from "@dojo/framework/widget-core/interfaces";
 
 export interface QueryQueryEditorProps {
     query: Query,
@@ -20,7 +21,7 @@ export interface QueryQueryEditorProps {
 }
 
 export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
-    protected render() {
+    protected render(): VNode {
         return v('div', {classes: css.root}, [
             v('div', {
                     classes: css.nonQueryEditorsContainer

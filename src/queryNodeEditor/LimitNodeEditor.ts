@@ -4,6 +4,7 @@ import {v, w, /*w*/} from "@dojo/framework/widget-core/d";
 import TextInput from '@dojo/widgets/text-input';
 import * as css from "../../styles/limitNode.m.css";
 import theme from "@dojo/themes/dojo";
+import {VNode} from '@dojo/framework/widget-core/interfaces';
 
 export interface LimitNodeEditorProps {
     node: Limit,
@@ -12,7 +13,7 @@ export interface LimitNodeEditorProps {
 }
 
 export default class LimitNodeEditor extends WidgetBase<LimitNodeEditorProps> {
-    render() {
+    render(): VNode {
         return v('div', {classes: css.root}, [
             v('div', {classes: css.titleRow}, [
                 v('span', {}, ['Limit node']),

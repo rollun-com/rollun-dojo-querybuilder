@@ -8,6 +8,7 @@ import AccordionPane from "@dojo/widgets/accordion-pane";
 import TitlePane from '@dojo/widgets/title-pane';
 //import theme from '../../../themes/default/theme';
 import theme from '@dojo/themes/dojo';
+import {DNode} from "@dojo/framework/widget-core/interfaces";
 
 
 export interface ChildNodeCreationFormProps {
@@ -45,7 +46,7 @@ export default class ChildNodeCreationForm extends WidgetBase<ChildNodeCreationF
         }
     };
 
-    protected render() {
+    protected render(): DNode {
         return w(AccordionPane, {
                 theme,
                 onRequestOpen: (key: string) => {

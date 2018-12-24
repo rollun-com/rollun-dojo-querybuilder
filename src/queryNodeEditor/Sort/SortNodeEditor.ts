@@ -2,7 +2,7 @@ import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import Sort, {SortOptions} from 'rollun-ts-rql/dist/nodes/Sort';
 import * as css from "../../../styles/sort/sortNode.m.css";
 import {v, w} from '@dojo/framework/widget-core/d';
-import {WNode} from '@dojo/framework/widget-core/interfaces';
+import {VNode, WNode} from '@dojo/framework/widget-core/interfaces';
 import SortNodeFieldEditor from "./SortNodeFieldEditor";
 
 export interface SortNodeEditorProps {
@@ -17,7 +17,7 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
     protected awaitingDrop: boolean = false;
     protected validDropTarget: boolean = false;
 
-    protected render() {
+    protected render(): VNode {
 
         return v('div', {classes: css.sortNodeEditor}, [
             v('div',

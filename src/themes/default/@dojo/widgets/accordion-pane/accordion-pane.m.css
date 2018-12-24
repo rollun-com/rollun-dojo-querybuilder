@@ -1,6 +1,0 @@
-@import '../../../../../../node_modules/@dojo/themes/dojo/variables.css';
-
-.root {
-    composes: root from '../../../../../../node_modules/@dojo/themes/dojo/accordion-pane.m.css';
-    width: 100%;
-}

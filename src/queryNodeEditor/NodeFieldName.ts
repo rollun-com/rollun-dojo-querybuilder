@@ -1,6 +1,7 @@
 import WidgetBase from "@dojo/framework/widget-core/WidgetBase";
 import {v} from "@dojo/framework/widget-core/d";
 import * as css from "../../styles/nodeFieldNames/nodeFieldName.m.css";
+import {VNode} from "@dojo/framework/widget-core/interfaces";
 
 export interface SelectFieldProps {
     fieldName: string,
@@ -9,7 +10,7 @@ export interface SelectFieldProps {
 }
 
 export default class NodeFieldName extends WidgetBase<SelectFieldProps> {
-    render() {
+    render(): VNode {
         const classes = this.properties.isActive ? `${css.root} ${css.active}` : css.root;
         return v('div', {
                 draggable: true,

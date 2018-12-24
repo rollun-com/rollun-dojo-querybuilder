@@ -4,6 +4,7 @@ import NodeFieldName from "../NodeFieldName";
 import WidgetBase from "@dojo/framework/widget-core/WidgetBase";
 import Select from 'rollun-ts-rql/dist/nodes/Select';
 import {SelectNodeDragData} from "./SelectNodeEditor";
+import {VNode} from "@dojo/framework/widget-core/interfaces";
 
 export interface ActiveSelectNodesContainerProps {
     node: Select,
@@ -16,7 +17,7 @@ export default class ActiveSelectNodes extends WidgetBase<ActiveSelectNodesConta
     private awaitingDrop: boolean = false;
     private validDropTarget: boolean = false;
 
-    protected render() {
+    protected render(): VNode {
         let classes = css.root + ' ';
         if (this.awaitingDrop) {
             classes += this.validDropTarget ? css.validDropTarget + ' ' : css.invalidDropTarget + ' '

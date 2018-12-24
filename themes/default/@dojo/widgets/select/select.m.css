@@ -1,0 +1,56 @@
+@import '../../../../../node_modules/@dojo/themes/dojo/variables.css';
+
+.root {
+    composes: root from '../../../../../node_modules/@dojo/themes/dojo/select.m.css';
+}
+
+.inputWrapper {
+    composes: inputWrapper from '../../../../../node_modules/@dojo/themes/dojo/select.m.css';
+}
+
+.trigger {
+    composes: trigger from '../../../../../node_modules/@dojo/themes/dojo/select.m.css';
+}
+
+.placeholder {
+    composes: placeholder from '../../../../../node_modules/@dojo/themes/dojo/select.m.css';
+}
+
+.required {
+
+}
+
+.dropdown {
+    composes: dropdown from '../../../../../node_modules/@dojo/themes/dojo/select.m.css';
+}
+
+.open {
+    composes: open from '../../../../../node_modules/@dojo/themes/dojo/select.m.css';
+}
+
+.input {
+    composes: input from '../../../../../node_modules/@dojo/themes/dojo/select.m.css';
+}
+
+.arrow {
+    composes: arrow from '../../../../../node_modules/@dojo/themes/dojo/select.m.css';
+}
+
+.focused {
+}
+
+.disabled {
+    composes: disabled from '../../../../../node_modules/@dojo/themes/dojo/select.m.css';
+}
+
+.readonly {
+    composes: readonly from '../../../../../node_modules/@dojo/themes/dojo/select.m.css';
+}
+
+.invalid {
+    composes: invalid from '../../../../../node_modules/@dojo/themes/dojo/select.m.css';
+}
+
+.valid {
+    composes: valid from '../../../../../node_modules/@dojo/themes/dojo/select.m.css';
+}

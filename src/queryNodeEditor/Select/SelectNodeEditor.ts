@@ -3,6 +3,7 @@ import {v, w} from '@dojo/framework/widget-core/d';
 import * as css from "../../../styles/select/selectNode.m.css";
 import Select from "rollun-ts-rql/dist/nodes/Select";
 import ActiveSelectNodesContainer from './ActiveSelectNodes';
+import {VNode} from '@dojo/framework/widget-core/interfaces';
 
 export interface SelectNodeDragData {
     fieldName: string
@@ -22,7 +23,7 @@ export default class SelectNodeEditor extends WidgetBase<SelectNodeProps> {
         fieldName: ''
     };
 
-    render() {
+    render(): VNode {
         return v('div',
             {classes: css.root},
             [
