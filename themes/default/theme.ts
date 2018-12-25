@@ -1,4 +1,4 @@
-import * as accordionPane from "./@dojo/widgets/accordion-pane/accordion-pane.m.css";
+import * as accordionPane from './@dojo/widgets/accordion-pane/accordion-pane.m.css';
 import * as dialog from './@dojo/widgets/dialog/dialog.m.css';
 import * as select from './@dojo/widgets/select/select.m.css';
 import * as titlePane from './@dojo/widgets/title-pane/title-pane.m.css';
