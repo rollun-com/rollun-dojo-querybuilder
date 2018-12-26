@@ -12,7 +12,7 @@ export default class PossibleNodeFields extends WidgetBase<PossibleNodeFieldsCon
 	private fieldNames: string[] = [];
 	private isStarted = false;
 	protected render(): VNode {
-		if (!this.isStarted) {
+		if (!this.isStarted && this.properties.fieldNames.length > 0) {
 			this.fieldNames = this.properties.fieldNames;
 			this.isStarted = true;
 		}
