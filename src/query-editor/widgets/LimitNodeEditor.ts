@@ -42,7 +42,7 @@ export default class LimitNodeEditor extends WidgetBase<LimitNodeEditorProps> {
 					w(TextInput, {
 						theme,
 						type: 'number',
-						value: String(this.properties.node.limit),
+						value: String(this.properties.node.offset),
 						onChange: (value: number) => {
 							this.properties.node.offset = value;
 							this.invalidate();
