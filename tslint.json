@@ -17,7 +17,7 @@
 		"no-any": false,
 		"no-arg": true,
 		"no-bitwise": false,
-		"no-consecutive-blank-lines": false,
+		"no-consecutive-blank-lines": true,
 		"no-console": false,
 		"no-construct": false,
 		"no-debugger": true,
