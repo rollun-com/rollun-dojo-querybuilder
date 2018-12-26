@@ -28,6 +28,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "grunt dist"
+    "build": "grunt dist",
+    "publish patch": "npm version patch && npm publish"
   }
 }
