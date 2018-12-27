@@ -9,12 +9,15 @@ import { WNode } from '@dojo/framework/widget-core/interfaces';
 export interface EditorPaneProps {
 	query: Query;
 	fieldNames: string[];
+
+	onApplyQuery(): void;
 }
 
 export default class QueryEditorInTitlePane extends WidgetBase<EditorPaneProps> {
 	private isOpen = false;
 
 	protected render(): WNode {
+		const {query, fieldNames, onApplyQuery} = this.properties;
 		return w(TitlePane, {
 			theme,
 			title: 'Edit query',
@@ -29,7 +32,8 @@ export default class QueryEditorInTitlePane extends WidgetBase<EditorPaneProps> 
 			}
 		}, [
 			v('div', {styles: {minHeight: '600px'}}, [
-				w(QueryEditor, {query: this.properties.query, fieldNames: this.properties.fieldNames})
+				w(QueryEditor, {query, fieldNames}),
+				v('btn', {onclick: () => onApplyQuery(), classes: 'btn btn-primary btn-block'}, ['Apply query'])
 			])
 		]);
 	}
