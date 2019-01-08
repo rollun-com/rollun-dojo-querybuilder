@@ -11,3 +11,12 @@
 .sortNodeEditor {
 
 }
+
+.invalidDropTarget {
+    border: 3px solid red;
+}
+
+.validDropTarget {
+    border: 3px solid #00ef00;
+
+}

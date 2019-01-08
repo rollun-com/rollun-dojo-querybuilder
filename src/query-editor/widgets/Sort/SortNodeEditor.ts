@@ -18,13 +18,19 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 	protected validDropTarget = false;
 
 	protected render(): VNode {
-
-		return v('div', {classes: css.sortNodeEditor}, [
+		let classes = css.sortNodeEditor;
+		if (this.awaitingDrop === true) {
+			classes += this.validDropTarget ? ' ' + css.validDropTarget : ' ' + css.invalidDropTarget;
+		}
+		return v('div', {classes}, [
 			v('div',
 				{
 					classes: css.sort,
 					ondragover: this.checkSortOptionValidity,
-					ondrop: this.addNewSortOption
+					ondrop: this.addNewSortOption,
+					ondragleave: (event: DragEvent) => {
+						this.disableDropTarget(event);
+					}
 				}, [
 					v('div', {classes: css.titleRow}, [
 						v('span', {}, ['Sort fields']),
@@ -59,8 +65,10 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 		this.awaitingDrop = true;
 		if (event.dataTransfer.types.indexOf('nodefieldname') !== -1) {
 			this.validDropTarget = true;
+			this.invalidate();
 			return false;
 		}
+		this.invalidate();
 		return true;
 	}
 
@@ -70,6 +78,12 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 		const newSortOptions = Object.assign({}, this.properties.node.sortOptions);
 		this.properties.onSortNodeChange(newSortOptions);
 		this.awaitingDrop = true;
+		this.validDropTarget = false;
+		this.invalidate();
+	}
+
+	private disableDropTarget(event: DragEvent) {
+		this.awaitingDrop = false;
 		this.validDropTarget = false;
 		this.invalidate();
 	}

@@ -43,6 +43,7 @@ export default class DropToRemoveField extends WidgetBase<DropToRemoveFieldProps
 			this.invalidate();
 			return false;
 		}
+		this.invalidate();
 		return true;
 	}
 
