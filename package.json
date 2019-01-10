@@ -9,14 +9,15 @@
     "tslib": "~1.8.1"
   },
   "devDependencies": {
-    "@dojo/cli-build-app": "^4.0.0",
+    "@dojo/cli": "^4.0.0",
+    "@dojo/cli-build-app": "^4.0.5",
     "@dojo/cli-create-theme": "^4.0.0",
     "@dojo/cli-test-intern": "^4.0.0",
     "@types/execa": "^0.9.0",
     "@types/grunt": "0.4.*",
     "@types/node": "~9.6.5",
     "grunt": "^1.0.1",
-    "grunt-dojo2": "~4.0.0",
+    "grunt-dojo2": "^4.0.2",
     "grunt-tslint": "^5.0.2",
     "load-grunt-tasks": "^3.5.2",
     "pkg-dir": "^3.0.0",
@@ -28,7 +29,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "grunt dist",
-    "publish patch": "npm version patch && npm publish"
+    "analyse": "node_modules/.bin/tslint --project ./tslint.json",
+    "build": "node_modules/.bin/grunt dist",
+    "test": "node_modules/.bin/dojo test -a"
   }
 }
