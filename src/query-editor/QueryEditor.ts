@@ -13,29 +13,34 @@ import Query from 'rollun-ts-rql/dist/Query';
 import * as css from '../styles/queryEditor.m.css';
 import DropToRemoveNodeField from './widgets/DropToRemoveNodeField';
 import PossibleNodeFields from './widgets/PossibleNodeFields';
-import { VNode } from '@dojo/framework/widget-core/interfaces';
+import { VNode, DNode } from '@dojo/framework/widget-core/interfaces';
 
 export interface QueryQueryEditorProps {
 	query: Query;
 	fieldNames: string[];
+	renderLimitNode?: boolean;
 }
 
 export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 	protected render(): VNode {
+		const nonQueryEditors: DNode[] = [
+			w(PossibleNodeFields, {fieldNames: this.properties.fieldNames}),
+			this.renderSelectNode(this.properties.query.selectNode),
+			this.renderSortNode(this.properties.query.sortNode),
+			w(DropToRemoveNodeField, {
+				onNodeFieldRemove: (fieldName: string, nodeType: string) => {
+					this.removeFieldFromNode(fieldName, nodeType);
+				}
+			})
+		];
+		if (this.properties.renderLimitNode) {
+			nonQueryEditors.push(this.renderLimitNode(this.properties.query.limitNode));
+		}
 		return v('div', {classes: css.root}, [
 			v('div', {
 					classes: css.nonQueryEditorsContainer
-				}, [
-					w(PossibleNodeFields, {fieldNames: this.properties.fieldNames}),
-					this.renderSelectNode(this.properties.query.selectNode),
-					this.renderSortNode(this.properties.query.sortNode),
-					w(DropToRemoveNodeField, {
-						onNodeFieldRemove: (fieldName: string, nodeType: string) => {
-							this.removeFieldFromNode(fieldName, nodeType);
-						}
-					}),
-					this.renderLimitNode(this.properties.query.limitNode)
-				]
+				},
+				nonQueryEditors
 			),
 			v('div', {
 				classes: css.queryEditorContainer

@@ -18,21 +18,21 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 	protected validDropTarget = false;
 
 	protected render(): VNode {
-		let classes = css.sortNodeEditor;
+		let classes = css.sortNodeEditor + ' card m-1';
 		if (this.awaitingDrop === true) {
 			classes += this.validDropTarget ? ' ' + css.validDropTarget : ' ' + css.invalidDropTarget;
 		}
 		return v('div', {classes}, [
 			v('div',
 				{
-					classes: css.sort,
+					classes: css.sort + 'card-body p-2',
 					ondragover: this.checkSortOptionValidity,
 					ondrop: this.addNewSortOption,
 					ondragleave: (event: DragEvent) => {
 						this.disableDropTarget(event);
 					}
 				}, [
-					v('div', {classes: css.titleRow}, [
+					v('div', {classes: css.titleRow + ' card-title'}, [
 						v('span', {}, ['Sort fields']),
 						v('button', {
 							classes: 'btn btn-sm btn-danger',
@@ -41,7 +41,7 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 							}
 						}, ['X'])
 					]),
-					v('div', {},
+					v('div', {classes: 'card-text'},
 						this.renderSortEditors()
 					)
 				])

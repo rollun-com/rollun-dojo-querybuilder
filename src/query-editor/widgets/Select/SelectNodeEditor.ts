@@ -25,26 +25,28 @@ export default class SelectNodeEditor extends WidgetBase<SelectNodeProps> {
 
 	render(): VNode {
 		return v('div',
-			{classes: css.root},
+			{classes: css.root + ' card m-1'},
 			[
-				v('div', {classes: css.controls}, [
-					v('span', {classes: css.title}, ['Select node']),
-					v('button', {
-						classes: 'btn btn-sm btn-danger',
-						onclick: () => this.properties.onRemove()
-					}, ['X'])
-				]),
-				v('div',
-					{classes: css.activeNodesContainer}, [
-						w(ActiveSelectNodesContainer, {
-							node: this.properties.node,
-							dragData: this.dragData,
-							onAddField: (fieldName: string) => {
-								this.addFieldToNode(fieldName);
-							}
-						})
-					]
-				)
+				v('div', {classes: 'card-body p-2'}, [
+					v('div', {classes: css.controls + ' card-title'}, [
+						v('span', {classes: css.title}, ['Select node']),
+						v('button', {
+							classes: 'btn btn-sm btn-danger',
+							onclick: () => this.properties.onRemove()
+						}, ['X'])
+					]),
+					v('div',
+						{classes: css.activeNodesContainer + ' card-text'}, [
+							w(ActiveSelectNodesContainer, {
+								node: this.properties.node,
+								dragData: this.dragData,
+								onAddField: (fieldName: string) => {
+									this.addFieldToNode(fieldName);
+								}
+							})
+						]
+					)
+				])
 			]
 		);
 

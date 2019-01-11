@@ -6,6 +6,10 @@
     background-color: #94c193
 }
 
+.root:hover {
+    cursor: grab;
+}
+
 .active {
 
 }
