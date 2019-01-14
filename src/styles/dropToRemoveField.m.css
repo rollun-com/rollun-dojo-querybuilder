@@ -1,6 +1,5 @@
 .root {
-    border: 1px solid darkgrey;
-    padding: 5px;
+    height: 100%;
 }
 
 .invalidDropTarget {
@@ -9,14 +8,13 @@
 
 .validDropTarget {
     border: 3px solid #00ef00;
-
 }
 
 .title {
-    margin-left: 5px;
+
 }
 
-.iconAligner{
+.iconAligner {
     display: flex;
     justify-content: center;
     align-items: center;

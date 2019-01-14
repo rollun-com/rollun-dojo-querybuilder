@@ -25,13 +25,17 @@ export default class SortNodeFieldEditor extends WidgetBase<SortFieldEditorProps
 				v('div', {
 					classes: css.sortFieldName
 				}, [fieldName]),
-				v('button', {
+				v('button',
+					{
 						classes: css.changeSortDirectionButton,
 						onclick: () => {
 							onSortDirectionChange(fieldName, (sortDirection === -1 ? 1 : -1));
 						}
 					},
-					[sortDirection === -1 ? 'asc' : 'desc']
+					[sortDirection === 1
+						? v('i', {classes: 'fas fa-caret-up'})
+						: v('i', {classes: 'fas fa-caret-down'})
+					]
 				)
 			]);
 	}

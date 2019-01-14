@@ -12,7 +12,7 @@ export default class DropToRemoveField extends WidgetBase<DropToRemoveFieldProps
 	private validDropTarget = false;
 
 	protected render(): VNode {
-		let classes = css.root + 'card m-1';
+		let classes = css.root + ' card m-1';
 		if (this.awaitingDrop === true) {
 			classes += this.validDropTarget ? ' ' + css.validDropTarget : ' ' + css.invalidDropTarget;
 		}
@@ -30,7 +30,7 @@ export default class DropToRemoveField extends WidgetBase<DropToRemoveFieldProps
 				}
 			},
 			[
-				v('div', {classes: 'card-body p-2 h-100'}, [
+				v('div', {classes: 'card-body p-3 h-100'}, [
 					v('span', {classes: css.title + ' card-title'}, ['Drop node here to remove it']),
 					v('div', {classes: css.iconAligner + ' card-text'}, [
 						v('div', {}, [
@@ -38,7 +38,8 @@ export default class DropToRemoveField extends WidgetBase<DropToRemoveFieldProps
 						])
 					])
 				])
-			]);
+			]
+		);
 	}
 
 	private checkDropPossibility(event: DragEvent) {

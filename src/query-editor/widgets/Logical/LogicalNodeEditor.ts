@@ -9,7 +9,7 @@ import AbstractArrayNode from 'rollun-ts-rql/dist/nodes/arrayNodes/AbstractArray
 import * as css from '../../../styles/logical/logicalNode.m.css';
 import Dialog from '@dojo/widgets/dialog';
 import theme from '@dojo/themes/dojo';
-import { WNode, VNode } from '@dojo/framework/widget-core/interfaces';
+import { WNode, DNode } from '@dojo/framework/widget-core/interfaces';
 import RqlNodeFactory, { RqlNodeFactoryParams } from '../../../rql-node-factory/RqlNodeFactory';
 import ChildNodeCreationForm from './ChildNodeCreationForm';
 
@@ -32,29 +32,35 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
 		this.nodeFactory = new RqlNodeFactory();
 	}
 
-	protected render(): VNode {
+	protected render(): DNode {
 		const onRemove = (id: number) => this.removeChildNode(id);
 		const fieldNames = this.properties.fieldNames;
 		return v('div', {classes: css.root}, [
 				v('div', {classes: css.controls}, [
-					v('div', {classes: css.title}, [this.properties.node.name]),
-					v('div', {classes: css.controlsButtons}, [
-						v('button',
-							{
-								classes: 'btn btn-light btn-sm mx-2',
-								onclick: () => {
-									this.addChildNode();
-								}
-							},
-							['+']),
-						v('button',
-							{
-								classes: 'btn btn-danger btn-sm',
-								onclick: () => {
-									this.properties.onRemove(this.properties.id);
-								}
-							},
-							['X'])
+					v('div', {classes: css.titleContainer}, [
+						v('div', {classes: css.title},
+							[this.getNodeName()]
+						)
+					]),
+					v('div', {classes: css.controlsButtonsContainer}, [
+						v('div', {classes: css.controlsButtons}, [
+							v('button',
+								{
+									classes: 'btn btn-light btn-sm mx-2',
+									onclick: () => {
+										this.addChildNode();
+									}
+								},
+								['+']),
+							v('button',
+								{
+									classes: 'btn btn-danger btn-sm',
+									onclick: () => {
+										this.properties.onRemove(this.properties.id);
+									}
+								},
+								['X'])
+						])
 					])
 				]),
 				v('div', {classes: css.childNodesContainer}, this.properties.node.subNodes.map(
@@ -87,6 +93,10 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
 				}, [this.getChildNodeCreationMenu()])
 			]
 		);
+	}
+
+	protected getNodeName(): DNode {
+		return v('div', {}, [this.properties.node.name]);
 	}
 
 	private removeChildNode(id: number) {

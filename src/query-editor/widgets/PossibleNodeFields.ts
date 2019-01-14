@@ -24,7 +24,8 @@ export default class PossibleNodeFields extends WidgetBase<PossibleNodeFieldsCon
 					(fieldName) => {
 						return w(NodeFieldName, {fieldName});
 					}
-				))])
+				))
+			])
 		]);
 	}
 }

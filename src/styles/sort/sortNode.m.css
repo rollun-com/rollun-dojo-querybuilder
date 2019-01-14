@@ -1,6 +1,4 @@
 .sort {
-    border: 1px solid darkgrey;
-    padding: 10px;
 }
 
 .titleRow {
@@ -9,7 +7,7 @@
 }
 
 .sortNodeEditor {
-
+    height: 100%;
 }
 
 .invalidDropTarget {
@@ -18,5 +16,11 @@
 
 .validDropTarget {
     border: 3px solid #00ef00;
+}
 
+.activeSortNodes {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    min-width: fit-content;
 }

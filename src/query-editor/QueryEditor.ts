@@ -7,13 +7,14 @@ import Limit from 'rollun-ts-rql/dist/nodes/Limit';
 import SelectNodeEditor from './widgets/Select/SelectNodeEditor';
 import SortNodeEditor from './widgets/Sort/SortNodeEditor';
 import LimitNodeEditor from './widgets/LimitNodeEditor';
-import LogicalNodeEditor from './widgets/Logical/LogicalNodeEditor';
 import And from 'rollun-ts-rql/dist/nodes/logicalNodes/And';
 import Query from 'rollun-ts-rql/dist/Query';
 import * as css from '../styles/queryEditor.m.css';
 import DropToRemoveNodeField from './widgets/DropToRemoveNodeField';
 import PossibleNodeFields from './widgets/PossibleNodeFields';
 import { VNode, DNode } from '@dojo/framework/widget-core/interfaces';
+import RootNodeEditor from './widgets/Logical/RootNodeEditor';
+import AbstractLogicalNode from 'rollun-ts-rql/dist/nodes/logicalNodes/AbstractLogicalNode';
 
 export interface QueryQueryEditorProps {
 	query: Query;
@@ -24,23 +25,31 @@ export interface QueryQueryEditorProps {
 export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 	protected render(): VNode {
 		const nonQueryEditors: DNode[] = [
-			w(PossibleNodeFields, {fieldNames: this.properties.fieldNames}),
-			this.renderSelectNode(this.properties.query.selectNode),
-			this.renderSortNode(this.properties.query.sortNode),
-			w(DropToRemoveNodeField, {
-				onNodeFieldRemove: (fieldName: string, nodeType: string) => {
-					this.removeFieldFromNode(fieldName, nodeType);
-				}
-			})
+			v('div', {classes: 'col-md-4 p-0'}, [
+				w(PossibleNodeFields, {fieldNames: this.properties.fieldNames})
+			]),
+			v('div', {classes: 'col-md-3 p-0'}, [
+				this.renderSelectNode(this.properties.query.selectNode)
+			]),
+			v('div', {classes: 'col-md-3 p-0'}, [
+				this.renderSortNode(this.properties.query.sortNode)
+			]),
+			v('div', {classes: 'col-md-2 p-0'}, [
+				w(DropToRemoveNodeField, {
+					onNodeFieldRemove: (fieldName: string, nodeType: string) => {
+						this.removeFieldFromNode(fieldName, nodeType);
+					}
+				})
+			])
 		];
 		if (this.properties.renderLimitNode) {
-			nonQueryEditors.push(this.renderLimitNode(this.properties.query.limitNode));
+			nonQueryEditors.push(v('div', {}, [this.renderLimitNode(this.properties.query.limitNode)]));
 		}
 		return v('div', {classes: css.root}, [
 			v('div', {
 					classes: css.nonQueryEditorsContainer
 				},
-				nonQueryEditors
+				[v('div', {classes: 'row m-0 w-100'}, nonQueryEditors)]
 			),
 			v('div', {
 				classes: css.queryEditorContainer
@@ -116,10 +125,15 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 
 	private renderQueryNode(node: AbstractQueryNode) {
 		if (node) {
-			return w(LogicalNodeEditor, {
-				id: 1, onRemove: () => {
+			return w(RootNodeEditor, {
+				id: 1,
+				onRemove: () => {
 					this.removeNode('query');
-				}, fieldNames: this.properties.fieldNames, node: new And([node])
+				},
+				fieldNames: this.properties.fieldNames,
+				node:  node instanceof AbstractLogicalNode
+					? node
+					: new And([node])
 			});
 		}
 		else {

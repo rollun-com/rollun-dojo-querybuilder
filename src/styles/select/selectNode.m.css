@@ -1,8 +1,7 @@
 .root {
-    border: 1px solid darkgrey;
-    padding: 10px;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .activeNodesContainer {
@@ -11,10 +10,24 @@
 
 .controls {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row;
 }
 
 .title {
-    margin-right: 70px;
+
 }
 
+.validDropTarget {
+    border: 3px solid #00ef00;
+}
+
+.invalidDropTarget {
+    border: 3px solid red;
+}
+
+.activeSelectNodes {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    min-width: fit-content;
+}

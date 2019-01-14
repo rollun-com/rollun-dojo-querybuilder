@@ -84,33 +84,40 @@ export default class ChildNodeCreationForm extends WidgetBase<ChildNodeCreationF
 				key: '2'
 			}, [
 				v('div', {classes: modalCss.scalarNodes}, [
-					w(Select, {
-						theme,
-						value: this.dialogState.scalar.name,
-						options: this.scalarNodeNames,
-						onChange: (value: string) => {
-							this.dialogState.scalar.name = value;
-							this.invalidate();
-						}
-					}),
-					w(TextInput, {
-						theme,
-						value: this.dialogState.scalar.field,
-						placeholder: 'field name',
-						onChange: (value: string) => {
-							this.dialogState.scalar.field = value;
-							this.invalidate();
-						}
-					}),
-					w(TextInput, {
-						theme,
-						value: this.dialogState.scalar.value,
-						placeholder: 'value',
-						onChange: (value: string) => {
-							this.dialogState.scalar.value = value;
-							this.invalidate();
-						}
-					}),
+					v('div', {classes: 'mb-2'}, [
+						w(Select, {
+							theme,
+							value: this.dialogState.scalar.name,
+							options: this.scalarNodeNames,
+							onChange: (value: string) => {
+								this.dialogState.scalar.name = value;
+								this.invalidate();
+							}
+						}),
+					]),
+
+					v('div', {classes: 'mb-2'}, [
+						w(TextInput, {
+							theme,
+							value: this.dialogState.scalar.field,
+							placeholder: 'field name',
+							onChange: (value: string) => {
+								this.dialogState.scalar.field = value;
+								this.invalidate();
+							}
+						}),
+					]),
+					v('div', {classes: 'mb-2'}, [
+						w(TextInput, {
+							theme,
+							value: this.dialogState.scalar.value,
+							placeholder: 'value',
+							onChange: (value: string) => {
+								this.dialogState.scalar.value = value;
+								this.invalidate();
+							}
+						}),
+					]),
 					v('button', {
 						classes: 'btn btn-sm btn-primary btn-block',
 						onclick: () => {
@@ -128,33 +135,39 @@ export default class ChildNodeCreationForm extends WidgetBase<ChildNodeCreationF
 				key: '3'
 			}, [
 				v('div', {classes: modalCss.arrayNodes}, [
-					w(Select, {
-						theme,
-						value: this.dialogState.array.name,
-						options: this.arrayNodeNames,
-						onChange: (value: string) => {
-							this.dialogState.array.name = value;
-							this.invalidate();
-						}
-					}),
-					w(TextInput, {
-						theme,
-						value: this.dialogState.array.field,
-						placeholder: 'field name',
-						onChange: (value: string) => {
-							this.dialogState.array.field = value;
-							this.invalidate();
-						}
-					}),
-					w(TextInput, {
-						theme,
-						value: this.dialogState.array.value,
-						placeholder: 'values',
-						onChange: (value: string) => {
-							this.dialogState.array.value = value;
-							this.invalidate();
-						}
-					}),
+					v('div', {classes: 'mb-2'}, [
+						w(Select, {
+							theme,
+							value: this.dialogState.array.name,
+							options: this.arrayNodeNames,
+							onChange: (value: string) => {
+								this.dialogState.array.name = value;
+								this.invalidate();
+							}
+						}),
+					]),
+					v('div', {classes: 'mb-2'}, [
+						w(TextInput, {
+							theme,
+							value: this.dialogState.array.field,
+							placeholder: 'field name',
+							onChange: (value: string) => {
+								this.dialogState.array.field = value;
+								this.invalidate();
+							}
+						}),
+					]),
+					v('div', {classes: 'mb-2'}, [
+						w(TextInput, {
+							theme,
+							value: this.dialogState.array.value,
+							placeholder: 'values',
+							onChange: (value: string) => {
+								this.dialogState.array.value = value;
+								this.invalidate();
+							}
+						}),
+					]),
 					v('button', {
 						classes: 'btn btn-sm btn-primary btn-block',
 						onclick: () => {

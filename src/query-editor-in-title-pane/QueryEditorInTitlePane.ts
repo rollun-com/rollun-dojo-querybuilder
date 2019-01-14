@@ -31,10 +31,8 @@ export default class QueryEditorInTitlePane extends WidgetBase<EditorPaneProps> 
 				this.invalidate();
 			}
 		}, [
-			v('div', {styles: {minHeight: '600px'}}, [
-				w(QueryEditor, {query, fieldNames}),
-				v('btn', {onclick: () => onApplyQuery(), classes: 'btn btn-primary btn-block'}, ['Apply query'])
-			])
+			w(QueryEditor, {query, fieldNames}),
+			v('btn', {onclick: () => onApplyQuery(), classes: 'btn btn-primary btn-block'}, ['Apply query'])
 		]);
 	}
 }

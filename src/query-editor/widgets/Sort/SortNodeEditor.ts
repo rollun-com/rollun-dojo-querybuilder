@@ -25,23 +25,46 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 		return v('div', {classes}, [
 			v('div',
 				{
-					classes: css.sort + 'card-body p-2',
+					classes: css.sort + ' card-body p-3',
 					ondragover: this.checkSortOptionValidity,
 					ondrop: this.addNewSortOption,
-					ondragleave: (event: DragEvent) => {
-						this.disableDropTarget(event);
+					ondragleave: () => {
+						this.disableDropTarget();
 					}
 				}, [
 					v('div', {classes: css.titleRow + ' card-title'}, [
-						v('span', {}, ['Sort fields']),
-						v('button', {
-							classes: 'btn btn-sm btn-danger',
-							onclick: () => {
-								this.properties.onRemove();
-							}
-						}, ['X'])
+						v('div', {
+								styles: {
+									display: 'flex',
+									flex: '1',
+									justifyContent: 'start'
+								}
+							},
+							[
+								v('span', {}, ['Sort fields'])
+							]
+						),
+						v('div',
+							{
+								styles: {
+									display: 'flex',
+									flex: '1',
+									justifyContent: 'flex-end'
+								}
+							},
+							[
+								v('button', {
+										classes: 'btn btn-sm btn-danger',
+										onclick: () => {
+											this.properties.onRemove();
+										}
+									},
+									['X']
+								)
+							]
+						)
 					]),
-					v('div', {classes: 'card-text'},
+					v('div', {classes: css.activeSortNodes + ' card-text'},
 						this.renderSortEditors()
 					)
 				])
@@ -77,12 +100,11 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 		this.properties.node.sortOptions[fieldName] = 1;
 		const newSortOptions = Object.assign({}, this.properties.node.sortOptions);
 		this.properties.onSortNodeChange(newSortOptions);
-		this.awaitingDrop = true;
-		this.validDropTarget = false;
+		this.disableDropTarget();
 		this.invalidate();
 	}
 
-	private disableDropTarget(event: DragEvent) {
+	private disableDropTarget() {
 		this.awaitingDrop = false;
 		this.validDropTarget = false;
 		this.invalidate();
