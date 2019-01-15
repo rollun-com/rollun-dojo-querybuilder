@@ -25,7 +25,7 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 		return v('div', {classes}, [
 			v('div',
 				{
-					classes: css.sort + ' card-body p-3',
+					classes: css.sort + ' card-body p-3 border',
 					ondragover: this.checkSortOptionValidity,
 					ondrop: this.addNewSortOption,
 					ondragleave: () => {

@@ -19,14 +19,25 @@ export default class SelectNodeEditor extends WidgetBase<SelectNodeProps> {
 	private validDropTarget = false;
 
 	protected render(): VNode {
-		let cardClasses = css.root + ' card m-1';
+		let cardClasses = css.root + ' card m-1 ';
 		if (this.awaitingDrop) {
 			cardClasses += this.validDropTarget ? css.validDropTarget + ' ' : css.invalidDropTarget + ' ';
 		}
 		return v('div',
 			{classes: cardClasses},
 			[
-				v('div', {classes: 'card-body p-3'}, [
+				v('div', {
+					classes: 'card-body p-3 border',
+					ondragover: (event: DragEvent) => {
+						this.checkDropPossibility(event);
+					},
+					ondragleave: (event: DragEvent) => {
+						this.disableDropTarget();
+					},
+					ondrop: (event: DragEvent) => {
+						this.addDroppedNodeToSelectedNodes(event);
+					}
+				}, [
 					v('div', {classes: css.controls + ' card-title'}, [
 						v('div',
 							{
@@ -61,15 +72,6 @@ export default class SelectNodeEditor extends WidgetBase<SelectNodeProps> {
 							v('div',
 								{
 									classes: css.activeSelectNodes,
-									ondragover: (event: DragEvent) => {
-										this.checkDropPossibility(event);
-									},
-									ondragleave: (event: DragEvent) => {
-										this.disableDropTarget();
-									},
-									ondrop: (event: DragEvent) => {
-										this.addDroppedNodeToSelectedNodes(event);
-									}
 								},
 
 								this.properties.node.fields.map(

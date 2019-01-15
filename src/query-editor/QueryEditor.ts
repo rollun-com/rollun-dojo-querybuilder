@@ -7,14 +7,21 @@ import Limit from 'rollun-ts-rql/dist/nodes/Limit';
 import SelectNodeEditor from './widgets/Select/SelectNodeEditor';
 import SortNodeEditor from './widgets/Sort/SortNodeEditor';
 import LimitNodeEditor from './widgets/LimitNodeEditor';
-import And from 'rollun-ts-rql/dist/nodes/logicalNodes/And';
 import Query from 'rollun-ts-rql/dist/Query';
 import * as css from '../styles/queryEditor.m.css';
 import DropToRemoveNodeField from './widgets/DropToRemoveNodeField';
 import PossibleNodeFields from './widgets/PossibleNodeFields';
 import { VNode, DNode } from '@dojo/framework/widget-core/interfaces';
-import RootNodeEditor from './widgets/Logical/RootNodeEditor';
 import AbstractLogicalNode from 'rollun-ts-rql/dist/nodes/logicalNodes/AbstractLogicalNode';
+import Dialog from '@dojo/widgets/dialog';
+import theme from '@dojo/themes/dojo';
+import ChildNodeCreationForm from './widgets/ChildNodeCreationForm';
+import RqlNodeFactory, { RqlNodeFactoryParams } from '../rql-node-factory/RqlNodeFactory';
+import LogicalNodeEditor from './widgets/Logical/LogicalNodeEditor';
+import ScalarNodeEditor from './widgets/ScalarNodeEditor';
+import AbstractScalarNode from 'rollun-ts-rql/dist/nodes/scalarNodes/AbstractScalarNode';
+import AbstractArrayNode from 'rollun-ts-rql/dist/nodes/arrayNodes/AbstractArrayNode';
+import ArrayNodeEditor from './widgets/ArrayNodeEditor';
 
 export interface QueryQueryEditorProps {
 	query: Query;
@@ -23,6 +30,10 @@ export interface QueryQueryEditorProps {
 }
 
 export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
+	private openQueryCreationDialog = false;
+	// private openQueryNodeCreationDialog = false;
+	private rqlNodeFactory = new RqlNodeFactory();
+
 	protected render(): VNode {
 		const nonQueryEditors: DNode[] = [
 			v('div', {classes: 'col-md-4 p-0'}, [
@@ -49,7 +60,9 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 			v('div', {
 					classes: css.nonQueryEditorsContainer
 				},
-				[v('div', {classes: 'row m-0 w-100'}, nonQueryEditors)]
+				[
+					v('div', {classes: 'mb-2 row m-0 w-100'}, nonQueryEditors)
+				]
 			),
 			v('div', {
 				classes: css.queryEditorContainer
@@ -125,25 +138,71 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 
 	private renderQueryNode(node: AbstractQueryNode) {
 		if (node) {
-			return w(RootNodeEditor, {
-				id: 1,
-				onRemove: () => {
-					this.removeNode('query');
-				},
-				fieldNames: this.properties.fieldNames,
-				node:  node instanceof AbstractLogicalNode
-					? node
-					: new And([node])
-			});
+			switch (true) {
+				case node instanceof AbstractLogicalNode:
+					const logicalNode = <AbstractLogicalNode> node;
+					return w(LogicalNodeEditor, {
+						id: 1,
+						onRemove: () => {
+							this.removeNode('query');
+						},
+						fieldNames: this.properties.fieldNames,
+						node: logicalNode
+					});
+				case node instanceof AbstractScalarNode:
+					const scalarNode = <AbstractScalarNode> node;
+					return w(ScalarNodeEditor, {
+						id: 1,
+						node: scalarNode,
+						fieldNames: this.properties.fieldNames,
+						onRemove: () => {
+							this.removeNode('query');
+						}
+					});
+				case node instanceof AbstractArrayNode:
+					const arrayNode = <AbstractArrayNode> node;
+					return w(ArrayNodeEditor, {
+						id: 1,
+						node: arrayNode,
+						fieldNames: this.properties.fieldNames,
+						onRemove: () => {
+							this.removeNode('query');
+						}
+					});
+			}
+
 		}
 		else {
-			return v('button', {
-				classes: 'btn btn-lg btn-light',
-				onclick: () => {
-					this.properties.query.queryNode = new And([]);
-					this.invalidate();
-				}
-			}, ['Add query node']);
+			return v('div', {}, [
+				v('button', {
+					classes: 'btn btn-lg btn-light',
+					onclick: () => {
+						this.openQueryCreationDialog = true;
+						this.invalidate();
+					}
+				}, ['Add query node']),
+				w(Dialog, {
+					theme,
+					title: 'Create new node',
+					modal: true,
+					open: this.openQueryCreationDialog,
+					onRequestClose: () => {
+						this.openQueryCreationDialog = false;
+						this.invalidate();
+					}
+				}, [v('div', {},
+					[
+						w(ChildNodeCreationForm, {
+							onChildNodeCreate: (nodeName: string, params: RqlNodeFactoryParams) => {
+								this.properties.query.queryNode = this.rqlNodeFactory.createNode(nodeName, params);
+								this.openQueryCreationDialog = false;
+								this.invalidate();
+							},
+							fieldNames: this.properties.fieldNames
+						})
+					])
+				])
+			]);
 		}
 	}
 

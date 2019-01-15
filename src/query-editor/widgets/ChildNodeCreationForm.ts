@@ -1,16 +1,15 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
-import { RqlNodeFactoryParams } from '../../../rql-node-factory/RqlNodeFactory';
+import { RqlNodeFactoryParams } from '../../rql-node-factory/RqlNodeFactory';
 import { v, w } from '@dojo/framework/widget-core/d';
-import * as modalCss from '../../../styles/logical/logicalNodeModal.m.css';
-import Select from '@dojo/widgets/select';
-import TextInput from '@dojo/widgets/text-input';
+import * as modalCss from '../../styles/logical/logicalNodeModal.m.css';
 import AccordionPane from '@dojo/widgets/accordion-pane';
 import TitlePane from '@dojo/widgets/title-pane';
-// import theme from '../../../themes/default/theme';
 import theme from '@dojo/themes/dojo';
 import { DNode } from '@dojo/framework/widget-core/interfaces';
 
 export interface ChildNodeCreationFormProps {
+	fieldNames: string[];
+
 	onChildNodeCreate(nodeName: string, params: RqlNodeFactoryParams): void;
 }
 
@@ -46,6 +45,8 @@ export default class ChildNodeCreationForm extends WidgetBase<ChildNodeCreationF
 	};
 
 	protected render(): DNode {
+		this.dialogState.scalar.field = this.properties.fieldNames[0];
+		this.dialogState.array.field = this.properties.fieldNames[0];
 		return w(AccordionPane, {
 			theme,
 			onRequestOpen: (key: string) => {
@@ -85,38 +86,38 @@ export default class ChildNodeCreationForm extends WidgetBase<ChildNodeCreationF
 			}, [
 				v('div', {classes: modalCss.scalarNodes}, [
 					v('div', {classes: 'mb-2'}, [
-						w(Select, {
-							theme,
-							value: this.dialogState.scalar.name,
-							options: this.scalarNodeNames,
-							onChange: (value: string) => {
-								this.dialogState.scalar.name = value;
-								this.invalidate();
-							}
-						}),
-					]),
-
-					v('div', {classes: 'mb-2'}, [
-						w(TextInput, {
-							theme,
-							value: this.dialogState.scalar.field,
-							placeholder: 'field name',
-							onChange: (value: string) => {
-								this.dialogState.scalar.field = value;
-								this.invalidate();
-							}
-						}),
+						v('select',
+							{
+								classes: 'custom-select',
+								onchange: (event: Event) => {
+									// @ts-ignore
+									this.dialogState.scalar.name = event.target.value;
+								}
+							},
+							this.scalarNodeNames.map((nodeName) => v('option', {value: nodeName}, [nodeName]))
+						)
 					]),
 					v('div', {classes: 'mb-2'}, [
-						w(TextInput, {
-							theme,
-							value: this.dialogState.scalar.value,
-							placeholder: 'value',
-							onChange: (value: string) => {
-								this.dialogState.scalar.value = value;
-								this.invalidate();
+						v('select',
+							{
+								classes: 'custom-select'
+							},
+							this.properties.fieldNames.map((fieldName) => v('option', {value: fieldName}, [fieldName]))
+						)
+					]),
+					v('div', {classes: 'mb-2'}, [
+						v('input',
+							{
+								type: 'text',
+								classes: 'form-control',
+								value: this.dialogState.scalar.value,
+								onchange: (event: Event) => {
+									// @ts-ignore
+									this.dialogState.scalar.value = event.target.value;
+									this.invalidate();
+								}
 							}
-						}),
+						)
 					]),
 					v('button', {
 						classes: 'btn btn-sm btn-primary btn-block',
@@ -136,37 +137,42 @@ export default class ChildNodeCreationForm extends WidgetBase<ChildNodeCreationF
 			}, [
 				v('div', {classes: modalCss.arrayNodes}, [
 					v('div', {classes: 'mb-2'}, [
-						w(Select, {
-							theme,
-							value: this.dialogState.array.name,
-							options: this.arrayNodeNames,
-							onChange: (value: string) => {
-								this.dialogState.array.name = value;
-								this.invalidate();
-							}
-						}),
+						v('select',
+							{
+								classes: 'custom-select',
+								onChange: (event: Event) => {
+									// @ts-ignore
+									this.dialogState.array.name = event.target.value;
+								}
+							},
+							this.arrayNodeNames.map((nodeName) => v('option', {value: nodeName}, [nodeName]))
+						)
 					]),
 					v('div', {classes: 'mb-2'}, [
-						w(TextInput, {
-							theme,
-							value: this.dialogState.array.field,
-							placeholder: 'field name',
-							onChange: (value: string) => {
-								this.dialogState.array.field = value;
-								this.invalidate();
-							}
-						}),
+						v('select',
+							{
+								classes: 'custom-select',
+								onChange: (event: Event) => {
+									// @ts-ignore
+									this.dialogState.array.field = event.target.value;
+								}
+							},
+							this.properties.fieldNames.map((nodeName) => v('option', {value: nodeName}, [nodeName]))
+						)
 					]),
 					v('div', {classes: 'mb-2'}, [
-						w(TextInput, {
-							theme,
-							value: this.dialogState.array.value,
-							placeholder: 'values',
-							onChange: (value: string) => {
-								this.dialogState.array.value = value;
-								this.invalidate();
+						v('input',
+							{
+								type: 'text',
+								classes: 'form-control',
+								value: this.dialogState.array.value,
+								onchange: (event: Event) => {
+									// @ts-ignore
+									this.dialogState.array.value = event.target.value;
+									this.invalidate();
+								}
 							}
-						}),
+						)
 					]),
 					v('button', {
 						classes: 'btn btn-sm btn-primary btn-block',

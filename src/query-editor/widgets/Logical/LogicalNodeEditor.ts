@@ -11,7 +11,7 @@ import Dialog from '@dojo/widgets/dialog';
 import theme from '@dojo/themes/dojo';
 import { WNode, DNode } from '@dojo/framework/widget-core/interfaces';
 import RqlNodeFactory, { RqlNodeFactoryParams } from '../../../rql-node-factory/RqlNodeFactory';
-import ChildNodeCreationForm from './ChildNodeCreationForm';
+import ChildNodeCreationForm from '../ChildNodeCreationForm';
 
 export interface LogicalNodeProps {
 	id: number;
@@ -51,7 +51,9 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
 										this.addChildNode();
 									}
 								},
-								['+']),
+								[
+									v('i', {classes: 'fas fa-plus fa-lg'})
+								]),
 							v('button',
 								{
 									classes: 'btn btn-danger btn-sm',
@@ -59,7 +61,9 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
 										this.properties.onRemove(this.properties.id);
 									}
 								},
-								['X'])
+								[
+									v('i', {classes: 'fas fa-times fa-lg'})
+								])
 						])
 					])
 				]),
@@ -113,7 +117,8 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
 		return w(ChildNodeCreationForm, {
 			onChildNodeCreate: (nodeName: string, params: RqlNodeFactoryParams) => {
 				this.createChildNode(nodeName, params);
-			}
+			},
+			fieldNames: this.properties.fieldNames
 		});
 	}
 

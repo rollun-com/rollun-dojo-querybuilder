@@ -1,71 +1,59 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
-import { v, w } from '@dojo/framework/widget-core/d';
+import { v } from '@dojo/framework/widget-core/d';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
 import * as css from '../../styles/scalarNode.m.css';
-import Select from '@dojo/widgets/select';
-import TextInput from '@dojo/widgets/text-input';
 import AbstractScalarNode from 'rollun-ts-rql/dist/nodes/scalarNodes/AbstractScalarNode';
-import AbstractArrayNode from 'rollun-ts-rql/dist/nodes/arrayNodes/AbstractArrayNode';
-import theme from '@dojo/themes/dojo';
 
 export interface ScalarNodeProps {
 	id: number;
-	node: (AbstractScalarNode | AbstractArrayNode);
+	node: (AbstractScalarNode);
 	fieldNames: string[];
 
 	onRemove(id: number): void;
 }
 
-interface OptionData {
-	disabled: boolean;
-	label: string;
-	value: string;
-}
-
 export default class ScalarNodeEditor extends WidgetBase<ScalarNodeProps> {
 	protected render(): VNode {
-		const fieldOptions: OptionData[] = this.properties.fieldNames.map((item) => {
-			return {disabled: false, label: item, value: item};
-		});
-		const nodeValueEditorText = (this.properties.node instanceof AbstractScalarNode)
-			? String(this.properties.node.value)
-			: this.properties.node.values.join();
 		return v('div', {classes: css.root},
 			[
-				w(Select, {
-					useNativeElement: true,
-					theme,
-					options: fieldOptions,
-					value: this.properties.node.field,
-					getOptionDisabled: (option: OptionData) => option.disabled,
-					getOptionLabel: (option: OptionData) => option.label,
-					getOptionValue: (option: OptionData) => option.value,
-					getOptionSelected: (option: OptionData) => option.value === this.properties.node.field,
-					onChange: (option: OptionData) => {
-						this.properties.node.field = option.value;
-						this.invalidate();
-					}
-				}),
-				v('span', {classes: 'px-3 py-1'}, [this.getHumanNodeName(this.properties.node.name)]),
-				w(TextInput, {
-					theme,
-					placeholder: 'Enter value',
-					value: nodeValueEditorText,
-					onChange: (value: string) => {
-						(this.properties.node instanceof AbstractScalarNode)
-							? this.properties.node.value = value
-							: this.properties.node.values = value.split(',');
-						this.invalidate();
-					}
-				}),
-				v('button', {
-						classes: 'btn btn-sm btn-danger mx-2',
-						onclick: () => {
-							this.remove(this.properties.id);
-						}
-					},
-					['X']
-				)
+				v('div', {classes: 'd-flex flex-row', styles: {'flex': '11'}},
+					[
+						v('select',
+							{
+								classes: 'custom-select',
+								onChange: (event: Event) => {
+									// @ts-ignore
+									this.properties.node.fieldName = event.target.value;
+								}
+							},
+							this.properties.fieldNames.map((nodeName) => v('option', {value: nodeName}, [nodeName]))
+						),
+						v('div', {classes: 'px-3 py-1 d-flex align-items-center'}, [this.getHumanNodeName(this.properties.node.name)]),
+						v('input',
+							{
+								type: 'text',
+								classes: 'form-control',
+								value: this.properties.node.value,
+								onchange: (event: Event) => {
+									// @ts-ignore
+									this.properties.node.value = event.target.value;
+									this.invalidate();
+								}
+							}
+						),
+					]),
+				v('div', {classes: 'd-flex flex-row-reverse', styles: {'flex': '1'}}, [
+					v('button', {
+							classes: css.removeButton + ' btn btn-sm btn-danger',
+							onclick: () => {
+								this.remove(this.properties.id);
+							}
+						},
+						[
+							v('i', {classes: 'fas fa-times fa-lg'})
+						]
+					)
+				])
 			]
 		);
 	}
