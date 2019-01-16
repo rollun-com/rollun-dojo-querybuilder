@@ -86,13 +86,18 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 			});
 		}
 		else {
-			return v('button', {
-				classes: 'btn btn-lg btn-light',
-				onclick: () => {
-					this.properties.query.selectNode = new Select(['id']);
-					this.invalidate();
-				}
-			}, ['Add select node']);
+			return v('div', {
+				classes: css.creationButtonAligner
+			}, [
+				v('button', {
+						classes: 'btn btn-lg btn-light',
+						onclick: () => {
+							this.properties.query.selectNode = new Select(['id']);
+							this.invalidate();
+						}
+					},
+					['Add select node'])
+			]);
 		}
 	}
 
@@ -108,13 +113,19 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 			return w(SortNodeEditor, {node, onRemove, onSortNodeChange});
 		}
 		else {
-			return v('button', {
-				classes: 'btn btn-lg btn-light',
-				onclick: () => {
-					this.properties.query.sortNode = new Sort({id: 1});
-					this.invalidate();
-				}
-			}, ['Add sort node']);
+			return v('div', {
+				classes: css.creationButtonAligner
+			}, [
+				v('button', {
+						classes: 'btn btn-lg btn-light',
+						onclick: () => {
+							this.properties.query.sortNode = new Sort({id: 1});
+							this.invalidate();
+						}
+					},
+					['Add sort node']
+				)
+			]);
 		}
 	}
 

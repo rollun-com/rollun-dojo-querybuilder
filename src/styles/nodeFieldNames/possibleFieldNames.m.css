@@ -12,8 +12,8 @@
 
 .possibleNodes {
     display: flex;
-    flex-wrap: wrap;
-    height: fit-content;
     min-width: fit-content;
+    flex-direction: column;
+    overflow-y: auto;
 }
 

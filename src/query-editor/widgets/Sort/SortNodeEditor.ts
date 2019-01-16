@@ -36,7 +36,7 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 						v('div', {
 								styles: {
 									display: 'flex',
-									flex: '1',
+									flex: '3',
 									justifyContent: 'start'
 								}
 							},

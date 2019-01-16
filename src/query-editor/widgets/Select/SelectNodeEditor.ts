@@ -43,12 +43,12 @@ export default class SelectNodeEditor extends WidgetBase<SelectNodeProps> {
 							{
 								styles: {
 									display: 'flex',
-									flex: '1',
+									flex: '3',
 									justifyContent: 'start'
 								}
 							},
 							[
-								v('div', {classes: css.title}, ['Select node'])
+								v('div', {classes: css.title}, ['Selected fields'])
 							]
 						),
 						v('div',

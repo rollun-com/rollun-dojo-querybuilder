@@ -19,7 +19,7 @@ export default class PossibleNodeFields extends WidgetBase<PossibleNodeFieldsCon
 		}
 		return v('div', {classes: css.root + ' card m-1'}, [
 			v('div', {classes: 'card-body p-3 border'}, [
-				v('div', {classes: css.title + ' card-title'}, ['Possible node fields']),
+				v('div', {classes: css.title + ' card-title'}, ['Possible fields']),
 				v('div', {classes: css.possibleNodes  + ' card-text'}, this.fieldNames.map(
 					(fieldName) => {
 						return w(NodeFieldName, {fieldName});
