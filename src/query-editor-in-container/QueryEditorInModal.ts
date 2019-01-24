@@ -5,19 +5,22 @@ import Dialog from '@dojo/widgets/dialog';
 import Query from 'rollun-ts-rql/dist/Query';
 import theme from '@dojo/themes/dojo';
 import QueryEditor from '../query-editor/QueryEditor';
+import Limit from 'rollun-ts-rql/dist/nodes/Limit';
 
 export interface EditorModalProps {
 	query: Query;
 	fieldNames: string[];
 
-	onApplyQuery(): void;
+	applyQuery(query: Query): void;
 }
 
 export default class QueryEditorInModal extends WidgetBase<EditorModalProps> {
 	private openDialog = false;
+	private query =  new Query({limit: new Limit(20, 0)});
 
 	protected render(): DNode {
-		const {query, fieldNames, onApplyQuery} = this.properties;
+		const {fieldNames, applyQuery} = this.properties;
+		const query = this.query;
 		return v('div', {
 				styles: {
 					display: 'flex',
@@ -48,7 +51,7 @@ export default class QueryEditorInModal extends WidgetBase<EditorModalProps> {
 							{
 								classes: 'btn btn-primary',
 								onclick: () => {
-									onApplyQuery();
+									applyQuery(this.query);
 									this.openDialog = false;
 									this.invalidate();
 								}
