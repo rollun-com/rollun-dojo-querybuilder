@@ -26,7 +26,9 @@ export default class ArrayNodeEditor extends WidgetBase<ArrayNodeProps> {
 								this.dialogState.array.field = event.target.value;
 							}
 						},
-						this.properties.fieldNames.map((nodeName) => v('option', {value: nodeName}, [nodeName]))
+						this.properties.fieldNames.map((nodeName) => v('option',
+							{value: nodeName, selected: nodeName === this.properties.node.name},
+							[nodeName]))
 					),
 					v('div', {classes: 'px-3 py-1 d-flex align-items-center'}, [this.getHumanNodeName(this.properties.node.name)]),
 					v('input',

@@ -5,19 +5,22 @@ import QueryEditor from '../query-editor/QueryEditor';
 import Query from 'rollun-ts-rql/dist/Query';
 import theme from '@dojo/themes/dojo';
 import { WNode } from '@dojo/framework/widget-core/interfaces';
+import Limit from 'rollun-ts-rql/dist/nodes/Limit';
 
 export interface EditorPaneProps {
 	query: Query;
 	fieldNames: string[];
 
-	onApplyQuery(): void;
+	applyQuery(query: Query): void;
 }
 
 export default class QueryEditorInTitlePane extends WidgetBase<EditorPaneProps> {
 	private isOpen = false;
+	private query =  new Query({limit: new Limit(20, 0)});
 
 	protected render(): WNode {
-		const {query, fieldNames, onApplyQuery} = this.properties;
+		const {fieldNames, applyQuery} = this.properties;
+		const query = this.query;
 		return w(TitlePane, {
 			theme,
 			title: 'Edit query',
@@ -32,7 +35,7 @@ export default class QueryEditorInTitlePane extends WidgetBase<EditorPaneProps> 
 			}
 		}, [
 			w(QueryEditor, {query, fieldNames}),
-			v('btn', {onclick: () => onApplyQuery(), classes: 'btn btn-primary btn-block'}, ['Apply query'])
+			v('btn', {onclick: () => applyQuery(this.query), classes: 'btn btn-primary btn-block'}, ['Apply query'])
 		]);
 	}
 }

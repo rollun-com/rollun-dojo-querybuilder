@@ -26,9 +26,15 @@ export default class ScalarNodeEditor extends WidgetBase<ScalarNodeProps> {
 									this.properties.node.fieldName = event.target.value;
 								}
 							},
-							this.properties.fieldNames.map((nodeName) => v('option', {value: nodeName}, [nodeName]))
+							this.properties.fieldNames.map((nodeName) => v('option',
+								{value: nodeName, selected: nodeName === this.properties.node.name},
+								[nodeName])
+							)
 						),
-						v('div', {classes: 'px-3 py-1 d-flex align-items-center'}, [this.getHumanNodeName(this.properties.node.name)]),
+						v('div',
+							{classes: 'px-3 py-1 d-flex align-items-center'},
+							[this.getHumanNodeName(this.properties.node.name)]
+						),
 						v('input',
 							{
 								type: 'text',
