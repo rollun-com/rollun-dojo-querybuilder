@@ -16,10 +16,16 @@ export interface EditorModalProps {
 
 export default class QueryEditorInModal extends WidgetBase<EditorModalProps> {
 	private openDialog = false;
-	private query =  new Query({limit: new Limit(20, 0)});
+	private query = new Query({limit: new Limit(20, 0)});
+	private fieldNames: string[];
+	private isStarted = false;
 
 	protected render(): DNode {
 		const {fieldNames, applyQuery} = this.properties;
+		if (!this.isStarted && fieldNames && fieldNames.length > 0) {
+			this.fieldNames = fieldNames;
+			this.isStarted = true;
+		}
 		const query = this.query;
 		return v('div', {
 				styles: {
@@ -45,7 +51,7 @@ export default class QueryEditorInModal extends WidgetBase<EditorModalProps> {
 						},
 					},
 					[v('div', {styles: {'flex': '1'}}, [
-						w(QueryEditor, {query, fieldNames}),
+						w(QueryEditor, {query, fieldNames: this.fieldNames}),
 					]),
 						v('btn',
 							{

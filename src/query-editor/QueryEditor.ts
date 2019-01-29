@@ -31,7 +31,6 @@ export interface QueryQueryEditorProps {
 
 export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 	private openQueryCreationDialog = false;
-	// private openQueryNodeCreationDialog = false;
 	private rqlNodeFactory = new RqlNodeFactory();
 
 	protected render(): VNode {
