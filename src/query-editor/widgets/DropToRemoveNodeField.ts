@@ -27,10 +27,11 @@ export default class DropToRemoveField extends WidgetBase<DropToRemoveFieldProps
 				},
 				ondrop: (event: DragEvent) => {
 					this.removeDroppedNodeFromSelectedNodes(event);
+					this.disableDropTarget(event);
 				}
 			},
 			[
-				v('div', {classes: 'card-body p-3 h-100'}, [
+				v('div', {classes: 'card-body p-3 h-100 border'}, [
 					v('span', {classes: css.title + ' card-title'}, ['Drop field to remove it']),
 					v('div', {classes: css.iconAligner + ' card-text'}, [
 						v('div', {}, [

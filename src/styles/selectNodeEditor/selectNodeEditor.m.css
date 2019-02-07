@@ -1,27 +1,36 @@
-.sortNodeEditor {
+.root {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     border: 3px solid transparent;
 }
 
-.sort {
+.activeNodesContainer {
+    display: flex;
 }
 
-.titleRow {
+.controls {
     display: flex;
     flex-direction: row;
+    height: 30px;
 }
 
-.invalidDropTarget {
-    border: 3px solid red;
+.title {
+
 }
 
 .validDropTarget {
     border: 3px solid #00ef00;
 }
 
-.activeSortNodes {
+.invalidDropTarget {
+    border: 3px solid red;
+}
+
+.activeSelectNodes {
     display: flex;
     min-width: fit-content;
     flex-direction: column;
     overflow-y: auto;
+    width: 100%;
 }

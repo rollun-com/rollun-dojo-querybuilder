@@ -1,6 +1,6 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import { v } from '@dojo/framework/widget-core/d';
-import * as css from '../../../styles/sort/sortFieldEditor.m.css';
+import * as css from '../../../styles/sortNodeEditor/sortFieldEditor.m.css';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
 
 export interface SortFieldEditorProps {

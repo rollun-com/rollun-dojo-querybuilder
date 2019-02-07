@@ -1,7 +1,7 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
-import { RqlNodeFactoryParams } from '../../rql-node-factory/RqlNodeFactory';
+import { RqlNodeFactoryParams } from '../../../../rql-node-factory/RqlNodeFactory';
 import { v, w } from '@dojo/framework/widget-core/d';
-import * as modalCss from '../../styles/logical/logicalNodeModal.m.css';
+import * as modalCss from '../../../../styles/queryQueryEditor/logical/logicalNodeModal.m.css';
 import AccordionPane from '@dojo/widgets/accordion-pane';
 import TitlePane from '@dojo/widgets/title-pane';
 import theme from '@dojo/themes/dojo';

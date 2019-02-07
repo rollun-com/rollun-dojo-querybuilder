@@ -1,5 +1,6 @@
 .root {
     height: 100%;
+    border: 3px solid transparent;
 }
 
 .invalidDropTarget {

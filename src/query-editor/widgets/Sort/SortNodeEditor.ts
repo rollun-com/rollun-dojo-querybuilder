@@ -1,6 +1,6 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import Sort, { SortOptions } from 'rollun-ts-rql/dist/nodes/Sort';
-import * as css from '../../../styles/sort/sortNode.m.css';
+import * as css from '../../../styles/sortNodeEditor/sortNodeEditor.m.css';
 import { v, w } from '@dojo/framework/widget-core/d';
 import { VNode, WNode } from '@dojo/framework/widget-core/interfaces';
 import SortNodeFieldEditor from './SortNodeFieldEditor';
@@ -59,7 +59,9 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 											this.properties.onRemove();
 										}
 									},
-									['X']
+									[
+										v('i', {classes: 'fas fa-times'})
+									]
 								)
 							]
 						)

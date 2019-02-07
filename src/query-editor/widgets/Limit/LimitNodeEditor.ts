@@ -2,7 +2,7 @@ import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import Limit from 'rollun-ts-rql/dist/nodes/Limit';
 import { v, w /*w*/ } from '@dojo/framework/widget-core/d';
 import TextInput from '@dojo/widgets/text-input';
-import * as css from '../../styles/limitNode.m.css';
+import * as css from '../../../styles/limitNode.m.css';
 import theme from '@dojo/themes/dojo';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
 

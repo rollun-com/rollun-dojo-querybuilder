@@ -4,7 +4,8 @@
 
 .sortFieldName {
     padding: 4px 12px;
-    background-color: #676aff
+    background-color: var(--cyan, #17a2b8);
+    width: 100%;
 }
 
 .changeSortDirectionButton {
@@ -15,4 +16,9 @@
     padding: 2px;
     display: flex;
     flex-direction: row;
+    margin: 2px;
+}
+
+.sortRow:hover {
+    cursor: grab;
 }

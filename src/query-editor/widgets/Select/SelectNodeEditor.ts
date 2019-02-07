@@ -1,6 +1,6 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import { v, w } from '@dojo/framework/widget-core/d';
-import * as css from '../../../styles/select/selectNode.m.css';
+import * as css from '../../../styles/selectNodeEditor/selectNodeEditor.m.css';
 import Select from 'rollun-ts-rql/dist/nodes/Select';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
 import NodeFieldName from '../NodeFieldName';
@@ -63,7 +63,9 @@ export default class SelectNodeEditor extends WidgetBase<SelectNodeProps> {
 								v('button', {
 									classes: 'btn btn-sm btn-danger',
 									onclick: () => this.properties.onRemove()
-								}, ['X'])
+								}, [
+									v('i', {classes: 'fas fa-times'})
+								])
 							]
 						)
 					]),

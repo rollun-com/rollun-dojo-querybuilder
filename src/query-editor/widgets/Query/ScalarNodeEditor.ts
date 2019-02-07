@@ -1,7 +1,7 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import { v } from '@dojo/framework/widget-core/d';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
-import * as css from '../../styles/scalarNode.m.css';
+import * as css from '../../../styles/queryQueryEditor/scalarNode.m.css';
 import AbstractScalarNode from 'rollun-ts-rql/dist/nodes/scalarNodes/AbstractScalarNode';
 
 export interface ScalarNodeProps {

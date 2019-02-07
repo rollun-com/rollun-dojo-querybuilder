@@ -1,7 +1,7 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import { v } from '@dojo/framework/widget-core/d';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
-import * as css from '../../styles/arrayNode.m.css';
+import * as css from '../../../styles/queryQueryEditor/arrayNode.m.css';
 import AbstractArrayNode from 'rollun-ts-rql/dist/nodes/arrayNodes/AbstractArrayNode';
 
 export interface ArrayNodeProps {

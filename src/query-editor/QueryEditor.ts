@@ -6,22 +6,22 @@ import Sort, { SortOptions } from 'rollun-ts-rql/dist/nodes/Sort';
 import Limit from 'rollun-ts-rql/dist/nodes/Limit';
 import SelectNodeEditor from './widgets/Select/SelectNodeEditor';
 import SortNodeEditor from './widgets/Sort/SortNodeEditor';
-import LimitNodeEditor from './widgets/LimitNodeEditor';
+import LimitNodeEditor from './widgets/Limit/LimitNodeEditor';
 import Query from 'rollun-ts-rql/dist/Query';
-import * as css from '../styles/queryEditor.m.css';
+import * as css from '../styles/queryQueryEditor/queryEditor.m.css';
 import DropToRemoveNodeField from './widgets/DropToRemoveNodeField';
 import PossibleNodeFields from './widgets/PossibleNodeFields';
 import { VNode, DNode } from '@dojo/framework/widget-core/interfaces';
 import AbstractLogicalNode from 'rollun-ts-rql/dist/nodes/logicalNodes/AbstractLogicalNode';
 import Dialog from '@dojo/widgets/dialog';
 import theme from '@dojo/themes/dojo';
-import ChildNodeCreationForm from './widgets/ChildNodeCreationForm';
+import ChildNodeCreationForm from './widgets/Query/Logical/ChildNodeCreationForm';
 import RqlNodeFactory, { RqlNodeFactoryParams } from '../rql-node-factory/RqlNodeFactory';
-import LogicalNodeEditor from './widgets/Logical/LogicalNodeEditor';
-import ScalarNodeEditor from './widgets/ScalarNodeEditor';
+import LogicalNodeEditor from './widgets/Query/Logical/LogicalNodeEditor';
+import ScalarNodeEditor from './widgets/Query/ScalarNodeEditor';
 import AbstractScalarNode from 'rollun-ts-rql/dist/nodes/scalarNodes/AbstractScalarNode';
 import AbstractArrayNode from 'rollun-ts-rql/dist/nodes/arrayNodes/AbstractArrayNode';
-import ArrayNodeEditor from './widgets/ArrayNodeEditor';
+import ArrayNodeEditor from './widgets/Query/ArrayNodeEditor';
 
 export interface QueryQueryEditorProps {
 	query: Query;

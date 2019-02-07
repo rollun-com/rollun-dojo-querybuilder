@@ -6,12 +6,12 @@ import ScalarNodeEditor from '../ScalarNodeEditor';
 import AbstractScalarNode from 'rollun-ts-rql/dist/nodes/scalarNodes/AbstractScalarNode';
 import ArrayNodeEditor from '../ArrayNodeEditor';
 import AbstractArrayNode from 'rollun-ts-rql/dist/nodes/arrayNodes/AbstractArrayNode';
-import * as css from '../../../styles/logical/logicalNode.m.css';
+import * as css from '../../../../styles/queryQueryEditor/logical/logicalNode.m.css';
 import Dialog from '@dojo/widgets/dialog';
 import theme from '@dojo/themes/dojo';
 import { WNode, DNode } from '@dojo/framework/widget-core/interfaces';
-import RqlNodeFactory, { RqlNodeFactoryParams } from '../../../rql-node-factory/RqlNodeFactory';
-import ChildNodeCreationForm from '../ChildNodeCreationForm';
+import RqlNodeFactory, { RqlNodeFactoryParams } from '../../../../rql-node-factory/RqlNodeFactory';
+import ChildNodeCreationForm from './ChildNodeCreationForm';
 
 export interface LogicalNodeProps {
 	id: number;
@@ -52,7 +52,7 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
 									}
 								},
 								[
-									v('i', {classes: 'fas fa-plus fa-lg'})
+									v('i', {classes: 'fas fa-plus'})
 								]),
 							v('button',
 								{
@@ -62,7 +62,7 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
 									}
 								},
 								[
-									v('i', {classes: 'fas fa-times fa-lg'})
+									v('i', {classes: 'fas fa-times'})
 								])
 						])
 					])

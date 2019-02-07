@@ -1,9 +1,9 @@
 .root {
-    padding: 4px 8px;
+    padding: 4px 12px;
     border: 1px solid darkgrey;
     border-radius: 3px;
     margin: 2px;
-    background-color: #94c193
+    background-color: var(--green, #28a745);
 }
 
 .root:hover {
@@ -15,7 +15,7 @@
 }
 
 .root.active {
-    background-color: #4fbf54
+    background-color: var(--teal, #20c997)
 
 }
 
