@@ -28,16 +28,13 @@ export default class QueryEditorInModal extends WidgetBase<EditorModalProps> {
 		}
 		const query = this.query;
 		return v('div', {
-				styles: {
-					display: 'flex',
-					flex: '1'
-				}
+				styles: {}
 			},
 			[
 				w(Dialog, {
 						theme,
 						extraClasses: {
-							'main': 'w-50 h-50',
+							'main': 'w-75 h-75',
 							'content': 'd-flex flex-column'
 						},
 						title: 'Edit query',
@@ -45,7 +42,6 @@ export default class QueryEditorInModal extends WidgetBase<EditorModalProps> {
 						underlay: true,
 						modal: true,
 						onRequestClose: () => {
-							// @ts-ignore
 							this.openDialog = false;
 							this.invalidate();
 						},

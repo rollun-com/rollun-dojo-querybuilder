@@ -87,6 +87,9 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
 				)),
 				w(Dialog, {
 					theme,
+					extraClasses: {
+						'main': 'w-50 h-50',
+					},
 					title: 'Create new node',
 					underlay: true,
 					open: this.openDialog,
@@ -94,7 +97,11 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
 						this.openDialog = false;
 						this.invalidate();
 					}
-				}, [this.getChildNodeCreationMenu()])
+				},
+					[
+						this.getChildNodeCreationMenu()
+					]
+				)
 			]
 		);
 	}
