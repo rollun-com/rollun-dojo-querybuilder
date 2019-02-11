@@ -31,7 +31,7 @@
   "scripts": {
     "analyse": "node_modules/.bin/tslint --project ./tslint.json",
     "build": "node_modules/.bin/grunt dist",
-    "test": "node_modules/.bin/dojo test -a",
+    "test": "node_modules/.bin/dojo test",
     "fix-linting": "node_modules/.bin/tslint --fix --project ./tslint.json"
   }
 }
