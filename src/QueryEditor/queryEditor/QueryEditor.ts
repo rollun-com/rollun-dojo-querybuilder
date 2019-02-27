@@ -12,8 +12,7 @@ import DropToRemoveNodeField from '../dropToRemoveNodeField/DropToRemoveNodeFiel
 import PossibleNodeFields from '../possibleNodeFields/PossibleNodeFields';
 import { VNode, DNode } from '@dojo/framework/widget-core/interfaces';
 import AbstractLogicalNode from 'rollun-ts-rql/dist/nodes/logicalNodes/AbstractLogicalNode';
-import Dialog from '@dojo/widgets/dialog';
-import theme from '@dojo/themes/dojo';
+import Dialog from 'rollun-common-widgets/dist/all/Dialog';
 import ChildNodeCreationForm from '../QueryQueryEditor/logicalEditor/ChildNodeCreationForm';
 import RqlNodeFactory, { RqlNodeFactoryParams } from '../../rqlNodeFactory/RqlNodeFactory';
 import LogicalNodeEditor from '../QueryQueryEditor/logicalEditor/LogicalNodeEditor';
@@ -194,25 +193,28 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 					}
 				}, ['Add query node']),
 				w(Dialog, {
-					theme,
 					title: 'Create new node',
-					modal: true,
-					open: this.openQueryCreationDialog,
-					onRequestClose: () => {
+					isOpen: this.openQueryCreationDialog,
+					onClose: () => {
 						this.openQueryCreationDialog = false;
 						this.invalidate();
+					},
+					options: {
+						centered: true
 					}
-				}, [v('div', {},
-					[
-						w(ChildNodeCreationForm, {
-							onChildNodeCreate: (nodeName: string, params: RqlNodeFactoryParams) => {
-								this.properties.query.queryNode = this.rqlNodeFactory.createNode(nodeName, params);
-								this.openQueryCreationDialog = false;
-								this.invalidate();
-							},
-							fieldNames: this.properties.fieldNames
-						})
-					])
+				}, [
+					v('div', {},
+						[
+							w(ChildNodeCreationForm, {
+								onChildNodeCreate: (nodeName: string, params: RqlNodeFactoryParams) => {
+									this.properties.query.queryNode = this.rqlNodeFactory.createNode(nodeName, params);
+									this.openQueryCreationDialog = false;
+									this.invalidate();
+								},
+								fieldNames: this.properties.fieldNames
+							})
+						]
+					)
 				])
 			]);
 		}
