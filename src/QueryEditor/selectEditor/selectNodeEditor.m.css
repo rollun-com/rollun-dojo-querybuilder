@@ -1,0 +1,44 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 3px solid transparent;
+}
+
+.activeNodesContainer {
+    display: flex;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+}
+
+.validDropTarget {
+    border: 3px solid #00ef00;
+}
+
+.invalidDropTarget {
+    border: 3px solid red;
+}
+
+.activeSelectNodes {
+    display: flex;
+    min-width: fit-content;
+    flex-direction: column;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.titleContainer {
+    display: flex;
+    flex: 3;
+    justify-content: start;
+}
+
+.closeBtnContainer {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+}

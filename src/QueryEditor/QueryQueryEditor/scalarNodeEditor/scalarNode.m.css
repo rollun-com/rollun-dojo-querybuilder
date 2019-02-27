@@ -1,0 +1,21 @@
+.root {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid darkgrey;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    padding: 8px;
+}
+
+.removeButton {
+    height: 36px;
+    width: 36px;
+}
+
+.controlsContainer {
+    flex: 11;
+}
+
+.closeBtnContainer {
+    flex: 1;
+}

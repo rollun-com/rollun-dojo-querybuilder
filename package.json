@@ -5,6 +5,8 @@
     "@dojo/framework": "^4.0.0",
     "@dojo/themes": "^4.0.1",
     "@dojo/widgets": "^4.0.1",
+    "rollun-common": "^1.0.0",
+    "rollun-common-widgets": "^1.0.1",
     "rollun-ts-rql": "^0.2.3",
     "tslib": "~1.8.1"
   },

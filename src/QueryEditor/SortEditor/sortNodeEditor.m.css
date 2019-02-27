@@ -1,0 +1,40 @@
+.sortNodeEditor {
+    height: 100%;
+    border: 3px solid transparent;
+}
+
+.sort {
+}
+
+.titleRow {
+    display: flex;
+    flex-direction: row;
+    max-height: 30px;
+}
+
+.invalidDropTarget {
+    border: 3px solid red;
+}
+
+.validDropTarget {
+    border: 3px solid #00ef00;
+}
+
+.activeSortNodes {
+    display: flex;
+    min-width: fit-content;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.titleContainer {
+    display: flex;
+    flex: 3;
+    justify-content: start;
+}
+
+.closeBtnContainer {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+}
