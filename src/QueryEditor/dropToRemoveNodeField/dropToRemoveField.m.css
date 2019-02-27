@@ -4,11 +4,11 @@
 }
 
 .invalidDropTarget {
-    border: 3px solid red;
+    border: 3px solid red!important;
 }
 
 .validDropTarget {
-    border: 3px solid #00ef00;
+    border: 3px solid #00ef00!important;
 }
 
 .title {

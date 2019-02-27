@@ -3,7 +3,7 @@
     border: 1px solid darkgrey;
     border-radius: 3px;
     margin: 2px;
-    background-color: var(--green, #28a745);
+    background-color: var(--green);
 }
 
 .root:hover {
@@ -15,7 +15,7 @@
 }
 
 .root.active {
-    background-color: var(--teal, #20c997)
+    background-color: var(--teal)
 
 }
 

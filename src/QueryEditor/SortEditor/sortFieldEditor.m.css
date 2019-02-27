@@ -4,7 +4,7 @@
 
 .sortFieldName {
     padding: 4px 12px;
-    background-color: var(--cyan, #17a2b8);
+    background-color: var(--cyan);
     width: 100%;
 }
 

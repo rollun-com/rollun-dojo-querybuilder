@@ -2,6 +2,8 @@ import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import { v } from '@dojo/framework/widget-core/d';
 import * as css from './sortFieldEditor.m.css';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
+import * as fa from 'rollun-common/dist/css/fontawesome.m.css';
+import * as faSolid from 'rollun-common/dist/css/solid.m.css';
 
 export interface SortFieldEditorProps {
 	fieldName: string;
@@ -33,8 +35,8 @@ export default class SortNodeFieldEditor extends WidgetBase<SortFieldEditorProps
 						}
 					},
 					[sortDirection === 1
-						? v('i', {classes: '${faSolid.fas} fa-caret-up'})
-						: v('i', {classes: '${faSolid.fas} fa-caret-down'})
+						? v('i', {classes: `${faSolid.fas} ${fa.faCaretUp}`})
+						: v('i', {classes: `${faSolid.fas} ${fa.faCaretDown}`})
 					]
 				)
 			]);
