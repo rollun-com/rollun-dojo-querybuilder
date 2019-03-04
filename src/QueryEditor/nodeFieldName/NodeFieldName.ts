@@ -2,6 +2,7 @@ import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import { v } from '@dojo/framework/widget-core/d';
 import * as css from './nodeFieldName.m.css';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
+import * as bs from 'rollun-common/dist/css/bootstrap.m.css';
 
 export interface SelectFieldProps {
 	fieldName: string;
@@ -11,7 +12,10 @@ export interface SelectFieldProps {
 
 export default class NodeFieldName extends WidgetBase<SelectFieldProps> {
 	render(): VNode {
-		const classes = this.properties.isActive ? `${css.root} ${css.active}` : css.root;
+		let classes = `${bs.py1} ${bs.px2} ${bs.mb1} ${css.root} `;
+		if (this.properties.isActive) {
+			classes += ` ${css.active}`;
+		}
 		return v('div', {
 				draggable: true,
 				ondragstart: (event: DragEvent) => {

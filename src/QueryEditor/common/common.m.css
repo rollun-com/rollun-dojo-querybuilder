@@ -1,0 +1,11 @@
+.transparentBorder {
+    border: 3px solid transparent;
+
+}
+.invalidBorder {
+    border: 3px solid red !important;
+}
+
+.validBorder {
+    border: 3px solid #00ef00 !important;
+}

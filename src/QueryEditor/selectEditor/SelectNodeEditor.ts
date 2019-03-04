@@ -4,9 +4,10 @@ import * as css from './selectNodeEditor.m.css';
 import Select from 'rollun-ts-rql/dist/nodes/Select';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
 import NodeFieldName from '../nodeFieldName/NodeFieldName';
-import * as bootstrap from 'rollun-common/dist/css/bootstrap.m.css';
+import * as bs from 'rollun-common/dist/css/bootstrap.m.css';
 import * as fa from 'rollun-common/dist/css/fontawesome.m.css';
 import * as faSolid from 'rollun-common/dist/css/solid.m.css';
+import * as commonCss from '../common/common.m.css';
 
 export interface SelectNodeProps {
 	node: Select;
@@ -22,15 +23,15 @@ export default class SelectNodeEditor extends WidgetBase<SelectNodeProps> {
 	private validDropTarget = false;
 
 	protected render(): VNode {
-		let cardClasses = `${css.root} ${bootstrap.card} ${bootstrap.m1} `;
+		let cardClasses = `${bs.dFlex} ${bs.flexColumn} ${bs.card} ${bs.m1} ${bs.h100} ${commonCss.transparentBorder} ${css.root}`;
 		if (this.awaitingDrop) {
-			cardClasses += this.validDropTarget ? css.validDropTarget + ' ' : css.invalidDropTarget + ' ';
+			cardClasses += this.validDropTarget ? commonCss.validBorder + ' ' : commonCss.invalidBorder + ' ';
 		}
 		return v('div',
 			{classes: cardClasses},
 			[
 				v('div', {
-					classes: `${bootstrap.cardBody} ${bootstrap.p3} ${bootstrap.border}`,
+					classes: `${bs.cardBody} ${bs.p3} ${bs.border}`,
 					ondragover: (event: DragEvent) => {
 						this.checkDropPossibility(event);
 					},
@@ -41,10 +42,10 @@ export default class SelectNodeEditor extends WidgetBase<SelectNodeProps> {
 						this.addDroppedNodeToSelectedNodes(event);
 					}
 				}, [
-					v('div', {classes: `${css.controls} ${bootstrap.cardTitle}`}, [
+					v('div', {classes: `${bs.dFlex} ${bs.flexRow} ${bs.cardTitle} ${css.controls}`}, [
 						v('div',
 							{
-								classes: `${css.titleContainer}`,
+								classes: `${bs.dFlex} ${bs.justifyContentCenter} ${css.titleContainer}`,
 							},
 							[
 								v('div', {}, ['Selected fields'])
@@ -52,11 +53,11 @@ export default class SelectNodeEditor extends WidgetBase<SelectNodeProps> {
 						),
 						v('div',
 							{
-								classes: `${css.closeBtnContainer}`,
+								classes: `${bs.dFlex} ${bs.justifyContentEnd} ${css.closeBtnContainer}`,
 							},
 							[
 								v('button', {
-									classes: `${bootstrap.btn} ${bootstrap.btnSm} ${bootstrap.btnDanger}`,
+									classes: `${bs.btn} ${bs.btnSm} ${bs.btnDanger}`,
 									onclick: () => this.properties.onRemove()
 								}, [
 									v('i', {classes: `${faSolid.fas} ${fa.faTimes}`})
@@ -65,10 +66,10 @@ export default class SelectNodeEditor extends WidgetBase<SelectNodeProps> {
 						)
 					]),
 					v('div',
-						{classes: `${css.activeNodesContainer} ${bootstrap.cardText}`}, [
+						{classes: `${bs.dFlex} ${bs.cardText} ${css.activeNodesContainer}`}, [
 							v('div',
 								{
-									classes: css.activeSelectNodes,
+									classes: `${bs.dFlex} ${bs.flexColumn} ${bs.w100} ${css.activeSelectNodes}`,
 								},
 
 								this.properties.node.fields.map(

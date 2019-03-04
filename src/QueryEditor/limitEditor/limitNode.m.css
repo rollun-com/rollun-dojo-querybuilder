@@ -1,26 +1,20 @@
 .root {
-    display: flex;
-    flex-direction: column;
     border: 1px solid darkgrey;
-    padding: 10px;
-    flex: 1;
-}
-
-.limitEditorRow {
-    display: flex;
-    flex-direction: row;
-}
-
-.editorsContainer {
-    display: flex;
-    flex-direction: column;
-}
-
-.editorItem {
-    margin-right: 10px;
+    /*flex: 1;*/
 }
 
 .titleRow {
-    display: flex;
-    flex-direction: row;
+
 }
+
+.editorsContainer {
+
+}
+
+.limitEditorRow {
+
+}
+
+.editorItem {
+}
+

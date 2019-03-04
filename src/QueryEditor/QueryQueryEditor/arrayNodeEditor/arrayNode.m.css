@@ -1,10 +1,6 @@
 .root {
-    display: flex;
-    flex-direction: row;
     border: 1px solid darkgrey;
     border-radius: 4px;
-    margin-bottom: 4px;
-    padding: 8px;
 }
 
 .removeButton {

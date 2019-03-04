@@ -5,7 +5,7 @@ import Dialog from 'rollun-common-widgets/dist/all/Dialog';
 import Query from 'rollun-ts-rql/dist/Query';
 import QueryEditor from '../QueryEditor/queryEditor/QueryEditor';
 import Limit from 'rollun-ts-rql/dist/nodes/Limit';
-import * as bootstrap from 'rollun-common/dist/css/bootstrap.m.css';
+import * as bs from 'rollun-common/dist/css/bootstrap.m.css';
 
 export interface EditorModalProps {
 	query: Query;
@@ -45,7 +45,7 @@ export default class QueryEditorInModal extends WidgetBase<EditorModalProps> {
 					},
 					[
 						v('div', {
-								styles: {'flex': '1'}
+								classes: `${bs.dFlex} ${bs.flexGrow1}`
 							},
 							[
 								w(QueryEditor, {query, fieldNames: this.fieldNames}),
@@ -53,7 +53,7 @@ export default class QueryEditorInModal extends WidgetBase<EditorModalProps> {
 						),
 						v('btn',
 							{
-								classes: `${bootstrap.btn} ${bootstrap.btnPrimary}`,
+								classes: `${bs.btn} ${bs.btnPrimary}`,
 								onclick: () => {
 									applyQuery(this.query);
 									this.openDialog = false;
@@ -66,7 +66,7 @@ export default class QueryEditorInModal extends WidgetBase<EditorModalProps> {
 				),
 				v('button',
 					{
-						classes: `${bootstrap.btn} ${bootstrap.btnPrimary}`,
+						classes: `${bs.btn} ${bs.btnPrimary}`,
 						onclick: () => {
 							this.openDialog = true;
 							this.invalidate();

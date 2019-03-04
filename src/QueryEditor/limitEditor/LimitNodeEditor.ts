@@ -4,7 +4,7 @@ import { v, w } from '@dojo/framework/widget-core/d';
 import TextInput from '@dojo/widgets/text-input';
 import * as css from './limitNode.m.css';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
-import * as bootstrap from 'rollun-common/dist/css/bootstrap.m.css';
+import * as bs from 'rollun-common/dist/css/bootstrap.m.css';
 
 export interface LimitNodeEditorProps {
 	node: Limit;
@@ -15,17 +15,17 @@ export interface LimitNodeEditorProps {
 export default class LimitNodeEditor extends WidgetBase<LimitNodeEditorProps> {
 	render(): VNode {
 		return v('div',
-			{classes: css.root},
+			{classes: `${bs.dFlex} ${bs.p2} ${bs.flexColumn} ${css.root}`},
 			[
 				v('div',
-					{classes: css.titleRow},
+					{classes: `${bs.dFlex} ${bs.flexRow} ${css.titleRow}`},
 					[
 						v('span',
 							{},
 							['Limit node']),
 						v('button',
 							{
-								classes: `${bootstrap.btn} ${bootstrap.btnSm} ${bootstrap.btnDanger}`,
+								classes: `${bs.btn} ${bs.btnSm} ${bs.btnDanger}`,
 								onclick: () => {
 									this.properties.onRemove();
 								}
@@ -33,13 +33,13 @@ export default class LimitNodeEditor extends WidgetBase<LimitNodeEditorProps> {
 						)
 					]),
 				v('div',
-					{classes: css.editorsContainer},
+					{classes: `${bs.dFlex} ${bs.flexColumn} ${css.editorsContainer}`},
 					[
 						v('div',
-							{classes: css.limitEditorRow},
+							{classes: `${bs.dFlex} ${bs.flexRow} ${css.limitEditorRow}`},
 							[
 								v('div',
-									{classes: css.editorItem},
+									{classes: `${bs.mr2} ${css.editorItem}`},
 									['Limit']
 								),
 								w(TextInput, {
@@ -52,10 +52,10 @@ export default class LimitNodeEditor extends WidgetBase<LimitNodeEditorProps> {
 								})
 							]),
 						v('div',
-							{classes: css.limitEditorRow},
+							{classes: `${bs.dFlex} ${bs.flexRow} ${css.limitEditorRow}`},
 							[
 								v('div',
-									{classes: css.editorItem},
+									{classes: `${bs.mr2} ${css.editorItem}`},
 									['Offset']
 								),
 								w(TextInput, {

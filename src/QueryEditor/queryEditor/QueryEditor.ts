@@ -5,7 +5,7 @@ import Select from 'rollun-ts-rql/dist/nodes/Select';
 import Sort, { SortOptions } from 'rollun-ts-rql/dist/nodes/Sort';
 import Limit from 'rollun-ts-rql/dist/nodes/Limit';
 import SelectNodeEditor from '../selectEditor/SelectNodeEditor';
-import SortNodeEditor from '../SortEditor/SortNodeEditor';
+import SortNodeEditor from '../sortEditor/SortNodeEditor';
 import LimitNodeEditor from '../limitEditor/LimitNodeEditor';
 import Query from 'rollun-ts-rql/dist/Query';
 import DropToRemoveNodeField from '../dropToRemoveNodeField/DropToRemoveNodeField';
@@ -20,7 +20,7 @@ import ScalarNodeEditor from '../QueryQueryEditor/scalarNodeEditor/ScalarNodeEdi
 import AbstractScalarNode from 'rollun-ts-rql/dist/nodes/scalarNodes/AbstractScalarNode';
 import AbstractArrayNode from 'rollun-ts-rql/dist/nodes/arrayNodes/AbstractArrayNode';
 import ArrayNodeEditor from '../QueryQueryEditor/arrayNodeEditor/ArrayNodeEditor';
-import * as bootstrap from 'rollun-common/dist/css/bootstrap.m.css';
+import * as bs from 'rollun-common/dist/css/bootstrap.m.css';
 import * as ownCss from './queryEditor.m.css';
 
 export interface QueryQueryEditorProps {
@@ -35,16 +35,16 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 
 	protected render(): VNode {
 		const nonQueryEditors: DNode[] = [
-			v('div', {classes: `${bootstrap.colMd4} ${bootstrap.p0}`}, [
+			v('div', {classes: `${bs.colMd4} ${bs.p0}`}, [
 				w(PossibleNodeFields, {fieldNames: this.properties.fieldNames})
 			]),
-			v('div', {classes: `${bootstrap.colMd3} ${bootstrap.p0}`}, [
+			v('div', {classes: `${bs.colMd3} ${bs.p0}`}, [
 				this.renderSelectNode(this.properties.query.selectNode)
 			]),
-			v('div', {classes: `${bootstrap.colMd3} ${bootstrap.p0}`}, [
+			v('div', {classes: `${bs.colMd3} ${bs.p0}`}, [
 				this.renderSortNode(this.properties.query.sortNode)
 			]),
-			v('div', {classes: `${bootstrap.colMd2} ${bootstrap.p0}`}, [
+			v('div', {classes: `${bs.colMd2} ${bs.p0}`}, [
 				w(DropToRemoveNodeField, {
 					onNodeFieldRemove: (fieldName: string, nodeType: string) => {
 						this.removeFieldFromNode(fieldName, nodeType);
@@ -56,10 +56,10 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 			nonQueryEditors.push(v('div', {}, [this.renderLimitNode(this.properties.query.limitNode)]));
 		}
 		return v('div', {
-			classes: `${bootstrap.dFlex} ${bootstrap.flexColumn} ${bootstrap.mb3}`
+			classes: `${bs.dFlex} ${bs.flexColumn} ${bs.mb3} ${bs.w100}`
 		}, [
 			v('div', {
-					classes: `${bootstrap.dFlex} ${bootstrap.flexRow} ${bootstrap.mb2} ${bootstrap.m0} ${bootstrap.row} ${bootstrap.w100} ${ownCss.nonQueryEditors}`,
+					classes: `${bs.dFlex} ${bs.flexRow} ${bs.mb2} ${bs.m0} ${bs.row} ${bs.w100} ${ownCss.nonQueryEditors}`,
 				},
 				nonQueryEditors
 			),
@@ -86,10 +86,10 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 		}
 		else {
 			return v('div', {
-				classes: `${bootstrap.dFlex} ${bootstrap.justifyContentCenter} ${bootstrap.alignItemsCenter} ${bootstrap.h100}`
+				classes: `${bs.dFlex} ${bs.justifyContentCenter} ${bs.alignItemsCenter} ${bs.h100}`
 			}, [
 				v('button', {
-						classes: `${bootstrap.btn} ${bootstrap.btnLg} ${bootstrap.btnLight}`,
+						classes: `${bs.btn} ${bs.btnLg} ${bs.btnLight}`,
 						onclick: () => {
 							this.properties.query.selectNode = new Select(['id']);
 							this.invalidate();
@@ -114,10 +114,10 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 		}
 		else {
 			return v('div', {
-				classes: `${bootstrap.dFlex} ${bootstrap.justifyContentCenter} ${bootstrap.alignItemsCenter} ${bootstrap.h100}`
+				classes: `${bs.dFlex} ${bs.justifyContentCenter} ${bs.alignItemsCenter} ${bs.h100}`
 			}, [
 				v('button', {
-						classes: `${bootstrap.btn} ${bootstrap.btnLg} ${bootstrap.btnLight}`,
+						classes: `${bs.btn} ${bs.btnLg} ${bs.btnLight}`,
 						onclick: () => {
 							this.properties.query.sortNode = new Sort({id: 1});
 							this.invalidate();
@@ -138,7 +138,7 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 		}
 		else {
 			return v('button', {
-				classes: `${bootstrap.btn} ${bootstrap.btnLg} ${bootstrap.btnLight}`,
+				classes: `${bs.btn} ${bs.btnLg} ${bs.btnLight}`,
 				onclick: () => {
 					this.properties.query.limitNode = new Limit(20, 0);
 					this.invalidate();
@@ -186,7 +186,7 @@ export default class QueryEditor extends WidgetBase<QueryQueryEditorProps> {
 		else {
 			return v('div', {}, [
 				v('button', {
-					classes: `${bootstrap.btn} ${bootstrap.btnLg} ${bootstrap.btnLight}`,
+					classes: `${bs.btn} ${bs.btnLg} ${bs.btnLight}`,
 					onclick: () => {
 						this.openQueryCreationDialog = true;
 						this.invalidate();

@@ -1,14 +1,4 @@
 .root {
-    height: 100%;
-    border: 3px solid transparent;
-}
-
-.invalidDropTarget {
-    border: 3px solid red!important;
-}
-
-.validDropTarget {
-    border: 3px solid #00ef00!important;
 }
 
 .title {
@@ -16,8 +6,5 @@
 }
 
 .iconAligner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 90%;
 }

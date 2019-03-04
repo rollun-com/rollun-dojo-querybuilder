@@ -1,9 +1,10 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import { v } from '@dojo/framework/widget-core/d';
-import * as css from './sortFieldEditor.m.css';
+import * as css from './sortNodeFieldEditor.m.css';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
 import * as fa from 'rollun-common/dist/css/fontawesome.m.css';
 import * as faSolid from 'rollun-common/dist/css/solid.m.css';
+import * as bs from 'rollun-common/dist/css/bootstrap.m.css';
 
 export interface SortFieldEditorProps {
 	fieldName: string;
@@ -17,7 +18,7 @@ export default class SortNodeFieldEditor extends WidgetBase<SortFieldEditorProps
 		const {fieldName, sortDirection, onSortDirectionChange} = this.properties;
 		return v('div',
 			{
-				classes: css.sortRow,
+				classes: `${bs.dFlex} ${bs.flexRow} ${bs.mb1}  ${css.sortRow}`,
 				draggable: true,
 				ondragstart: (event: DragEvent) => {
 					this.handleDragStart(event);
@@ -25,11 +26,11 @@ export default class SortNodeFieldEditor extends WidgetBase<SortFieldEditorProps
 			},
 			[
 				v('div', {
-					classes: css.sortFieldName
+					classes: `${bs.py1} ${bs.px2} ${bs.w100} ${css.sortFieldName}`
 				}, [fieldName]),
 				v('button',
 					{
-						classes: css.changeSortDirectionButton,
+						classes: `${css.changeSortDirectionButton}`,
 						onclick: () => {
 							onSortDirectionChange(fieldName, (sortDirection === -1 ? 1 : -1));
 						}

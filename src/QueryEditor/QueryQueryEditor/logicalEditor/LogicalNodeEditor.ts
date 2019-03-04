@@ -6,14 +6,14 @@ import ScalarNodeEditor from '../scalarNodeEditor/ScalarNodeEditor';
 import AbstractScalarNode from 'rollun-ts-rql/dist/nodes/scalarNodes/AbstractScalarNode';
 import ArrayNodeEditor from '../arrayNodeEditor/ArrayNodeEditor';
 import AbstractArrayNode from 'rollun-ts-rql/dist/nodes/arrayNodes/AbstractArrayNode';
-import * as css from './logicalNode.m.css';
 import Dialog from 'rollun-common-widgets/dist/all/Dialog';
 import { WNode, DNode } from '@dojo/framework/widget-core/interfaces';
 import RqlNodeFactory, { RqlNodeFactoryParams } from '../../../rqlNodeFactory/RqlNodeFactory';
 import ChildNodeCreationForm from './ChildNodeCreationForm';
-import * as bootstrap from 'rollun-common/dist/css/bootstrap.m.css';
+import * as bs from 'rollun-common/dist/css/bootstrap.m.css';
 import * as fa from 'rollun-common/dist/css/fontawesome.m.css';
 import * as faSolid from 'rollun-common/dist/css/solid.m.css';
+import * as css from './logicalNode.m.css';
 
 export interface LogicalNodeProps {
 	id: number;
@@ -37,18 +37,19 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
 	protected render(): DNode {
 		const onRemove = (id: number) => this.removeChildNode(id);
 		const fieldNames = this.properties.fieldNames;
-		return v('div', {classes: css.root}, [
-				v('div', {classes: css.controls}, [
-					v('div', {classes: css.titleContainer}, [
-						v('div', {classes: css.title},
+		return v('div', {classes: `${bs.dFlex} ${bs.flexColumn} ${css.root}`}, [
+				v('div', {classes: `${bs.dFlex} ${bs.flexRow} ${bs.bgInfo} ${bs.textWhite} ${bs.p1} ${css.controls}`},
+					[
+					v('div', {classes: `${bs.dFlex} ${bs.justifyContentStart} ${css.titleContainer}`}, [
+						v('div', {classes: `${bs.m1} ${css.title}`},
 							[this.getNodeName()]
 						)
 					]),
-					v('div', {classes: css.controlsButtonsContainer}, [
+					v('div', {classes: `${bs.dFlex} ${bs.justifyContentEnd} ${css.controlsButtonsContainer}`}, [
 						v('div', {classes: css.controlsButtons}, [
 							v('button',
 								{
-									classes: `${bootstrap.btn} ${bootstrap.btnLight} ${bootstrap.btnSm} ${bootstrap.mx2}`,
+									classes: `${bs.btn} ${bs.btnLight} ${bs.btnSm} ${bs.mx2}`,
 									onclick: () => {
 										this.addChildNode();
 									}
@@ -58,7 +59,7 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
 								]),
 							v('button',
 								{
-									classes: `${bootstrap.btn} ${bootstrap.btnDanger} ${bootstrap.btnSm}`,
+									classes: `${bs.btn} ${bs.btnDanger} ${bs.btnSm}`,
 									onclick: () => {
 										this.properties.onRemove(this.properties.id);
 									}
@@ -69,7 +70,9 @@ export default class LogicalNodeEditor extends WidgetBase<LogicalNodeProps> {
 						])
 					])
 				]),
-				v('div', {classes: css.childNodesContainer}, this.properties.node.subNodes.map(
+				v('div',
+					{classes: `${bs.dFlex} ${bs.flexColumn} ${bs.p2} ${css.childNodesContainer}`},
+					this.properties.node.subNodes.map(
 					(node: AbstractQueryNode, id: number) => {
 						let castedNode;
 						switch (true) {

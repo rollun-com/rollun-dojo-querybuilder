@@ -1,0 +1,12 @@
+.root {
+}
+
+.title {
+    height: 30px;
+}
+
+.possibleNodes {
+    min-width: fit-content;
+    overflow-y: auto;
+}
+

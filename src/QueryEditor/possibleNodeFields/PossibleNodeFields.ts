@@ -1,9 +1,10 @@
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import { v, w } from '@dojo/framework/widget-core/d';
 import NodeFieldName from '../nodeFieldName/NodeFieldName';
-import * as css from './possibleFieldNames.m.css';
+import * as css from './possibleNodeFields.m.css';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
-import * as bootstrap from 'rollun-common/dist/css/bootstrap.m.css';
+import * as bs from 'rollun-common/dist/css/bootstrap.m.css';
+import * as commonCss from '../common/common.m.css';
 
 export interface PossibleNodeFieldsContainerProps {
 	fieldNames: string[];
@@ -19,17 +20,17 @@ export default class PossibleNodeFields extends WidgetBase<PossibleNodeFieldsCon
 			this.isStarted = true;
 		}
 		return v('div',
-			{classes: `${css.root} ${bootstrap.card} ${bootstrap.m1}`},
+			{classes: `${bs.dFlex} ${bs.flexColumn} ${bs.h100} ${bs.card} ${bs.m1} ${commonCss.transparentBorder} ${css.root}`},
 			[
 				v('div',
-					{classes: `${bootstrap.cardBody} ${bootstrap.p3} ${bootstrap.border}`},
+					{classes: `${bs.cardBody} ${bs.p3} ${bs.border}`},
 					[
 						v('div',
-							{classes: `${css.title} ${bootstrap.cardTitle}`},
+							{classes: `${bs.cardTitle} ${css.title}`},
 							['Possible fields']
 						),
 						v('div',
-							{classes: `${css.possibleNodes} ${bootstrap.cardText}`},
+							{classes: `${bs.dFlex} ${bs.flexColumn} ${bs.cardText} ${css.possibleNodes}`},
 							this.fieldNames.map(
 								(fieldName) => {
 									return w(NodeFieldName, {fieldName});

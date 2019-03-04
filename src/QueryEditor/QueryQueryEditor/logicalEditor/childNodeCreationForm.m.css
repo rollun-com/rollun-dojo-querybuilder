@@ -1,0 +1,11 @@
+.logicalNodes {
+}
+
+.scalarNodes {
+    min-height: 380px;
+}
+
+.arrayNodes {
+    min-height: 150px;
+}
+

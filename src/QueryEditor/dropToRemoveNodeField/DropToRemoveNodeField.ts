@@ -2,9 +2,10 @@ import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import { v } from '@dojo/framework/widget-core/d';
 import * as css from './dropToRemoveField.m.css';
 import { VNode } from '@dojo/framework/widget-core/interfaces';
-import * as bootstrap from 'rollun-common/dist/css/bootstrap.m.css';
+import * as bs from 'rollun-common/dist/css/bootstrap.m.css';
 import * as fa from 'rollun-common/dist/css/fontawesome.m.css';
 import * as faSolid from 'rollun-common/dist/css/solid.m.css';
+import * as commonCss from '../common/common.m.css';
 
 export interface DropToRemoveFieldProps {
 	onNodeFieldRemove(fieldName: string, nodeName: string): void;
@@ -15,9 +16,9 @@ export default class DropToRemoveField extends WidgetBase<DropToRemoveFieldProps
 	private validDropTarget = false;
 
 	protected render(): VNode {
-		let classes = `${css.root} ${bootstrap.card} ${bootstrap.m1}`;
+		let classes = `${css.root} ${bs.card} ${bs.h100} ${bs.m1} ${commonCss.transparentBorder}`;
 		if (this.awaitingDrop === true) {
-			classes += this.validDropTarget ? ` ${css.validDropTarget}` : ` ${css.invalidDropTarget}`;
+			classes += this.validDropTarget ? ` ${commonCss.validBorder}` : ` ${commonCss.invalidBorder}`;
 		}
 		return v('div',
 			{
@@ -35,13 +36,13 @@ export default class DropToRemoveField extends WidgetBase<DropToRemoveFieldProps
 			},
 			[
 				v('div',
-					{classes: `${bootstrap.cardBody} ${bootstrap.p3} ${bootstrap.h100} ${bootstrap.border}`},
+					{classes: `${bs.cardBody} ${bs.p3} ${bs.h100} ${bs.border}`},
 					[
 						v('span',
-							{classes: `${css.title} ${bootstrap.cardTitle}`},
+							{classes: `${css.title} ${bs.cardTitle}`},
 							['Drop field to remove it']),
 						v('div',
-							{classes: `${css.iconAligner} ${bootstrap.cardText}`},
+							{classes: `${bs.cardText} ${bs.dFlex} ${bs.justifyContentCenter} ${bs.alignItemsCenter} ${css.iconAligner}`},
 							[
 								v('div',
 									{},

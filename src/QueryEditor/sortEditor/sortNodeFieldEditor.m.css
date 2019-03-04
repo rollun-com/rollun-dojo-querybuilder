@@ -1,0 +1,19 @@
+.root {
+
+}
+
+.sortRow {
+
+}
+
+.sortRow:hover {
+    cursor: grab;
+}
+
+.sortFieldName {
+    background-color: var(--cyan);
+}
+
+.changeSortDirectionButton {
+
+}

@@ -4,9 +4,10 @@ import * as css from './sortNodeEditor.m.css';
 import { v, w } from '@dojo/framework/widget-core/d';
 import { VNode, WNode } from '@dojo/framework/widget-core/interfaces';
 import SortNodeFieldEditor from './SortNodeFieldEditor';
-import * as bootstrap from 'rollun-common/dist/css/bootstrap.m.css';
+import * as bs from 'rollun-common/dist/css/bootstrap.m.css';
 import * as fa from 'rollun-common/dist/css/fontawesome.m.css';
 import * as faSolid from 'rollun-common/dist/css/solid.m.css';
+import * as commonCss from '../common/common.m.css';
 
 export interface SortNodeEditorProps {
 	node: Sort;
@@ -21,23 +22,23 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 	protected validDropTarget = false;
 
 	protected render(): VNode {
-		let classes = `${css.sortNodeEditor} ${bootstrap.card} ${bootstrap.m1}`;
+		let classes = `${bs.card} ${bs.m1} ${bs.h100} ${commonCss.transparentBorder} ${css.root}`;
 		if (this.awaitingDrop === true) {
-			classes += this.validDropTarget ? ` ${css.validDropTarget}` : ` ${css.invalidDropTarget}`;
+			classes += this.validDropTarget ? ` ${commonCss.validBorder}` : ` ${commonCss.invalidBorder}`;
 		}
 		return v('div', {classes}, [
 			v('div',
 				{
-					classes: `${css.sort} ${bootstrap.cardBody} ${bootstrap.p3} ${bootstrap.border}`,
+					classes: ` ${bs.cardBody} ${bs.p3} ${bs.border} ${css.sort}`,
 					ondragover: this.checkSortOptionValidity,
 					ondrop: this.addNewSortOption,
 					ondragleave: () => {
 						this.disableDropTarget();
 					}
 				}, [
-					v('div', {classes: `${css.titleRow} ${bootstrap.cardTitle}`}, [
+					v('div', {classes: `${bs.dFlex} ${bs.flexRow} ${bs.cardTitle} ${css.titleRow}`}, [
 						v('div', {
-								classes: `${css.titleContainer}`
+								classes: `${bs.dFlex} ${bs.justifyContentStart} ${css.titleContainer}`
 							},
 							[
 								v('span', {}, ['Sort fields'])
@@ -45,11 +46,11 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 						),
 						v('div',
 							{
-								classes: `${css.closeBtnContainer}`,
+								classes: `${bs.dFlex} ${bs.flexRow} ${bs.justifyContentEnd} ${css.closeBtnContainer}`,
 							},
 							[
 								v('button', {
-										classes: `${bootstrap.btn} ${bootstrap.btnSm} ${bootstrap.btnDanger}`,
+										classes: `${bs.btn} ${bs.btnSm} ${bs.btnDanger}`,
 										onclick: () => {
 											this.properties.onRemove();
 										}
@@ -61,10 +62,11 @@ export default class SortNodeEditor extends WidgetBase<SortNodeEditorProps> {
 							]
 						)
 					]),
-					v('div', {classes: `${css.activeSortNodes} ${bootstrap.cardText}`},
+					v('div', {classes: `${bs.dFlex} ${bs.flexColumn} ${css.activeSortNodes} ${bs.cardText}`},
 						this.renderSortEditors()
 					)
-				])
+				]
+			)
 		]);
 	}
 

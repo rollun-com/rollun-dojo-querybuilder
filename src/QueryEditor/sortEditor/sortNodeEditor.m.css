@@ -1,8 +1,11 @@
 .root {
 }
 
-.controls {
-    height: 30px;
+.sort {
+}
+
+.titleRow {
+    max-height: 30px;
 }
 
 .titleContainer {
@@ -13,10 +16,7 @@
     flex: 1;
 }
 
-.activeNodesContainer {
-}
-
-.activeSelectNodes {
+.activeSortNodes {
     min-width: fit-content;
     overflow-y: auto;
 }
